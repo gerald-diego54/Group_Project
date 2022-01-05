@@ -1,25 +1,25 @@
 // Login
 import React, { useState} from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import sweetAlert from "sweetalert";
-// import Link, { useNavigate } from "react-router-dom";
+import Link, { useNavigate } from "react-router-dom";
 // import axios from "axios";
 import "../css/style.css";
 import imgtitle from "../images/image-title.svg";
 import waveHand from "../images/waveHand.png";
-import Process from "./Process";
 
 
 const LogIn = () => {
-    const history = useNavigate();
+    // const history = useNavigate();
     const submitForm = (e) => {
         e.preventDefault();
         let username = document.querySelector("input[name='username']").value;
         let password = document.querySelector("input[name='password']").value;
         console.log(username, password);
         if (username == "admin" && password == "admin123") {
-            sweetAlert({ icon: "success", text: "Welcome" });
-            window.location.href = "/process";
+            sweetAlert({ icon: "success", text: "Welcome" }).then(() => {
+                window.location.href = "/dashboard";
+            });
         }
         else if (username == "" && password == "") return sweetAlert({icon: "info", text: "Input field required!"});
         else return sweetAlert({icon: "error", text: "Invalid username or password!" });

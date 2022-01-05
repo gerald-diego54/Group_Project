@@ -4,7 +4,7 @@ import UserDetails from './UserDetails';
 import Venue from './Venue';
 
 export default class AddCustomer extends Component {
-    
+    // state of the variables
     state = {
         step: 1,
         first_name: "",
@@ -28,6 +28,8 @@ export default class AddCustomer extends Component {
         event_province: "",
         event_region: ""
     }
+
+    // Step indicators
     prevStep = () => {
         const { step } = this.state;
         this.setState({ step: step - 1 });
@@ -37,7 +39,6 @@ export default class AddCustomer extends Component {
         this.setState({ step: step + 1 });
     }
     handleChange = input => e => {
-        
         this.setState({ [input]: e.target.value });
     }
 
@@ -45,7 +46,7 @@ export default class AddCustomer extends Component {
 
 
     render() {
-
+// destructuring the variables
         const { step } = this.state;
         const {
             first_name,
@@ -70,6 +71,7 @@ export default class AddCustomer extends Component {
             event_region
         } = this.state;
 
+// storing values in variable
         const values = {
             first_name,
             middle_name,
@@ -92,6 +94,8 @@ export default class AddCustomer extends Component {
             event_province,
             event_region
         }
+
+// Indicator steps flow
         switch (step) {
             case 1:
                
@@ -113,9 +117,8 @@ export default class AddCustomer extends Component {
                     />
                 )
             case 3:
-                return <h1>Confirm</h1>
-            case 4:
                 return <h1>Success</h1>
+              
         }
     }
 
