@@ -10,10 +10,10 @@ use App\Models\UserCateringModel;
 class SystemController extends Controller{
 
 
-    public function authenticatelogin(Request $request){
+    public function authenticatelogin(Request $request, $username, $password){
 
     // Retrive data
-        $data = UserCateringModel::all();
+        $data = UserCateringModel::find();
     // Retrieve front end data
 
     // validate
@@ -24,7 +24,7 @@ class SystemController extends Controller{
         if ($validate -> fails()) return response() -> json(["status" => 422, "validate_error" => $validate]);
     
     // authenticate
-    $user = Auth::user();
+        
     
     // send response
 

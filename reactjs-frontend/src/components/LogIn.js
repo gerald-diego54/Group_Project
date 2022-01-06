@@ -21,7 +21,29 @@ const LogIn = () => {
         //     password
         // }
         
-        // axios.post("api/loginvalidate", Data);
+        if (username == "admin" && password == "admin123"){
+            sweetAlert({
+                icon: "success",
+                title: "Welcome!"
+            }).then(response => {
+                window.location.href = "/dashboard";
+            });
+        }
+
+        else if (username == "" || password == ""){
+            sweetAlert({
+                icon: "info",
+                title: "All fields required!"
+            });
+        }
+        else return sweetAlert({
+            icon: "error",
+            title: "Incorrect Username or Password!"
+        });
+
+        // axios.post("api/loginvalidate", Data).then(response => {
+        //     console.log(response.data);
+        // });
 
 
         // console.log(username, password);
