@@ -1,5 +1,5 @@
 // Dashboard
-import React, { useEffect, useRef, useState } from 'react';
+// import React, { useEffect, useRef, useState } from 'react';
 import '../css/style.css';
 import graph_one from '../images/chart_1.svg';
 import graph_two from '../images/chart_2.svg';
@@ -85,23 +85,23 @@ const Dashboard = () => {
                 <div className='row'>
                     <div className='col'>
                         <div className="container shadow bg-body rounded" style={{ marginLeft: 20, border: 0, width: 451, height: 254, position: "relative", top: 50 }}>
-                            <img className='my-4' src={graph_one} />
+                            <img alt='' className='my-4' src={graph_one} />
                         </div>
                     </div>
                     <div className='col'>
                         <div className="container shadow bg-body rounded" style={{ marginLeft: 20, border: 0, width: 451, height: 254, position: "relative", top: 50 }}>
-                            <img className='my-4' src={graph_two} />
+                            <img alt='' className='my-4' src={graph_two} />
                         </div>
                     </div>
                 </div><br /><br />
                 <div className='row'>
                     <div className='col'>
                         <div className="container shadow bg-body rounded" style={{ marginLeft: 20, border: 0, width: 451, height: 254, position: "relative", top: 50 }}>
-                            <img className='my-4' src={graph_three} />
+                            <img alt='' className='my-4' src={graph_three} />
                         </div>
                     </div>
                     <div className='col'><br />
-                        <img className='my-5' src={image_1} />
+                        <img alt='' className='my-5' src={image_1} />
                     </div>
                 </div>
             </div>

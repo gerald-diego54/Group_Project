@@ -1,5 +1,5 @@
 // Login
-import React, { useState } from "react";
+// import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import sweetAlert from "sweetalert";
 // import Link, { useNavigate } from "react-router-dom";
@@ -21,7 +21,7 @@ const LogIn = () => {
         //     password
         // }
         
-        if (username == "admin" && password == "admin123"){
+        if (username === "admin" && password === "admin123"){
             sweetAlert({
                 icon: "success",
                 title: "Welcome!"
@@ -30,7 +30,7 @@ const LogIn = () => {
             });
         }
 
-        else if (username == "" || password == ""){
+        else if (username === "" || password === ""){
             sweetAlert({
                 icon: "info",
                 title: "All fields required!"
@@ -62,7 +62,7 @@ const LogIn = () => {
                     <form onSubmit={submitForm} className="needs-validation" noValidate>
                         <div className="row">
                             <div className="col">
-                                <img src={waveHand} />
+                                <img alt="" src={waveHand} />
                             </div>
                         </div>
                         <div className="row">
@@ -100,7 +100,7 @@ const LogIn = () => {
                     </form>
                 </div>
             </div>
-            <img className="imgtitle" src={imgtitle} />
+            <img alt="" className="imgtitle" src={imgtitle} />
         </div>
     )
 }
