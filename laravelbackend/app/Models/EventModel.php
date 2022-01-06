@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class EventModel extends Model
 {
     use HasFactory;
-    protected $table = ["event_info_table"];
+    protected $table = "event_info_table";
 
     // Protected Fillable
     protected $fillable = [
