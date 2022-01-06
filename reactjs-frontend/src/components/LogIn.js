@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import sweetAlert from "sweetalert";
 // import Link, { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import "../css/style.css";
 import imgtitle from "../images/image-title.svg";
 import waveHand from "../images/waveHand.png";
