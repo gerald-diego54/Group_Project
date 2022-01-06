@@ -1,5 +1,5 @@
 // Dashboard
-// import React, { useEffect, useRef, useState } from 'react';
+// import React, {Component } from 'react';
 import '../css/style.css';
 import graph_one from '../images/chart_1.svg';
 import graph_two from '../images/chart_2.svg';
@@ -7,6 +7,21 @@ import graph_three from '../images/chart_3.svg';
 import image_1 from '../images/img_1.svg';
 import Sidebar from './Sidebar';
 
+
+//Date and time display on Dashboard
+var today = new Date();
+var day = today.getDay();
+var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
+let dayname = daylist[day];
+var hours = today.getHours();
+var minute = today.getMinutes();
+var part= '';
+  if (hours < 12){
+      part ='AM';
+  }
+  else {
+      part ='PM';
+  }
 
 
 const Dashboard = () => {
@@ -20,7 +35,7 @@ const Dashboard = () => {
                         <p className='fs-3 fw-bold' style={{ float: "left", marginLeft: 20, marginTop: 20 }}>Overview</p>
                     </div>
                     <div className='col'>
-                        <p className='fs-5 fw-bold' style={{ float: "right", marginLeft: 20, marginTop: 27, color: '#7A7A7A' }}>Wednesday, January 03, 2022 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10:46 A.M.</p>
+                        <p className='fs-5 fw-bold' style={{ float: "right", marginLeft: 20, marginTop: 27, color: '#7A7A7A' }}>{dayname}, {hours}:{minute} {part}</p>
                     </div>
                 </div>
                 <div className='row'>
