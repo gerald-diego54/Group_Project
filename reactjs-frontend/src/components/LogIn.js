@@ -21,7 +21,7 @@ const LogIn = () => {
         //     password
         // }
         
-        if (username === "admin" && password === "admin123"){
+        if (username === "admin" && password === "admin"){
             sweetAlert({
                 icon: "success",
                 title: "Welcome!"
