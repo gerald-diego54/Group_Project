@@ -14,7 +14,11 @@ use App\Http\Controllers\SystemController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post("/loginvalidate", [SystemController::class, "authenticatelogin"]);
+// Route::post("/loginvalidate", [SystemController::class, "authenticatelogin"]);
+Route::post("/addcustomer", [SystemController::class, "add"]);
+
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

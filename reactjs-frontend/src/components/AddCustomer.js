@@ -119,7 +119,7 @@ export default class AddCustomer extends Component {
                     />
                 )
             case 3:
-                return <h1>Success</h1>
+                return (<h1>Success</h1>)
               
         }
     }
