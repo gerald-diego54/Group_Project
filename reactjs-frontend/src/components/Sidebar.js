@@ -21,7 +21,7 @@ const Sidebar = () => {
                         </Link>
                     </div>
                     <div className='col'>
-                        <Link className='link-decoration' to={"/reservation"}>
+                        <Link className='link-decoration' to={"/addrecord"}>
                             <i className="bi bi-calendar-date icon-color py-4" />
                             <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 57 }}>Reservation</p>
                         </Link>
