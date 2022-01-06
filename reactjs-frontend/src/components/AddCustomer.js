@@ -5,11 +5,13 @@ import fieldset from '../images/fieldset.svg';
 import '../css/style.css';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
+import {useNavigate} from 'react-router-dom';
 
 
 
 
 const AddCustomer = () => {
+    const navigate = useNavigate();
     const [values, setValue] = useState({
         first_name: "",
         middle_name: "",
@@ -50,8 +52,11 @@ const AddCustomer = () => {
             if (response.data.status === 200) {
                 sweetAlert({
                     icon: "success",
-                    title: response.data.message
-                });
+                    title: response.data.message,
+                    button: "Next"
+                }).then(response => {
+                    window.location.href = "/event";
+                })
             }
             else if (response.data.status === 422){
                 sweetAlert({
