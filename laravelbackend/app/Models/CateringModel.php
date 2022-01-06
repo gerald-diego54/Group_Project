@@ -16,7 +16,7 @@ class CateringModel extends Model
     protected $fillable = [
         "first_name",
         "middle_name",
-        "last-name",
+        "last_name",
         "mobile_number",
         "email",
         "address_line1",
