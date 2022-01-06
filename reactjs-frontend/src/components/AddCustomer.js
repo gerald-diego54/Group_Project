@@ -29,6 +29,8 @@ export default class AddCustomer extends Component {
         event_region: ""
     }
 
+    
+
     // Step indicators
     prevStep = () => {
         const { step } = this.state;

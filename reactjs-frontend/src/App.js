@@ -6,7 +6,9 @@ import Dashboard from './components/Dashboard';
 // import Record from './components/Record';
 import LogIn from './components/LogIn';
 import AddCustomer from './components/AddCustomer';
+import axios from 'axios';
 
+axios.defaults.baseURL = "http://localhost:8000/";
 
 function App() {
   return (

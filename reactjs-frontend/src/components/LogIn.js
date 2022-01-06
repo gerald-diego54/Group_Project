@@ -1,9 +1,9 @@
 // Login
-import React, { useState} from "react";
+import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import sweetAlert from "sweetalert";
-import Link, { useNavigate } from "react-router-dom";
-// import axios from "axios";
+// import Link, { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../css/style.css";
 import imgtitle from "../images/image-title.svg";
 import waveHand from "../images/waveHand.png";
@@ -15,14 +15,20 @@ const LogIn = () => {
         e.preventDefault();
         let username = document.querySelector("input[name='username']").value;
         let password = document.querySelector("input[name='password']").value;
-        console.log(username, password);
-        if (username == "admin" && password == "admin123") {
-            sweetAlert({ icon: "success", text: "Welcome" }).then(() => {
-                window.location.href = "/dashboard";
-            });
-        }
-        else if (username == "" && password == "") return sweetAlert({icon: "info", text: "Input field required!"});
-        else return sweetAlert({icon: "error", text: "Invalid username or password!" });
+
+        // const Data = {
+        //     username,
+        //     password
+        // }
+        
+        axios.post("api/loginvalidate", Data);
+
+
+        // console.log(username, password);
+        // if (username == "admin" && password == "admin123") {
+
+        // }
+
     }
     return (
         <div className="container-fluid">
@@ -44,17 +50,17 @@ const LogIn = () => {
                         </div>
                         <div className="row justify-content-center">
                             <div className="col-5">
-                                <div class="form-floating w-100 mx-3">
-                                    <input type="text" class="form-control" name="username" placeholder="name@example.com" required />
-                                    <label for="floatingInput" className="form-label">Username</label>
+                                <div className="form-floating w-100 mx-3">
+                                    <input type="text" className="form-control" name="username" placeholder="name@example.com" required />
+                                    <label htmlFor="floatingInput" className="form-label">Username</label>
                                 </div>
                             </div>
                         </div><br />
                         <div className="row justify-content-center">
                             <div className="col-5">
-                                <div class="form-floating w-100 mx-3">
-                                    <input type="password" class="form-control" name="password" placeholder="name@example.com" maxLength={12} required />
-                                    <label for="floatingInput">Password</label>
+                                <div className="form-floating w-100 mx-3">
+                                    <input type="password" className="form-control" name="password" placeholder="name@example.com" maxLength={12} required />
+                                    <label htmlFor="floatingInput">Password</label>
                                 </div>
                             </div>
                         </div><br />
