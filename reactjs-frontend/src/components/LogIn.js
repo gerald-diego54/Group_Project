@@ -21,7 +21,7 @@ const LogIn = () => {
         //     password
         // }
         
-        axios.post("api/loginvalidate", Data);
+        // axios.post("api/loginvalidate", Data);
 
 
         // console.log(username, password);
