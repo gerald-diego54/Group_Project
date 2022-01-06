@@ -10,13 +10,13 @@ class CateringModel extends Model
     use HasFactory;
 
     // Protected Data
-    protected $table = ["customer_info_table"];
+    protected $table = "customer_info_table";
 
     // Protected Fillable
     protected $fillable = [
         "first_name",
         "middle_name",
-        "last-name",
+        "last_name",
         "mobile_number",
         "email",
         "address_line1",
@@ -24,7 +24,6 @@ class CateringModel extends Model
         "barangay",
         "city",
         "province",
-        "region",
-        
+        "region"
     ];
 }

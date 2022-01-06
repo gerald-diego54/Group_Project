@@ -17,7 +17,7 @@ class CustomerInformationTable extends Migration
             $table->id();
             $table->string("first_name");
             $table->string("middle_name");
-            $table->string("last-name");
+            $table->string("last_name");
             $table->integer("mobile_number");
             $table->string("email");
             $table->string("address_line1");

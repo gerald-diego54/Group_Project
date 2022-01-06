@@ -22,24 +22,24 @@ class SystemController extends Controller{
             "province" => "required",
             "region" => "required"
         ]);
-        if ($validator->fails()) {
-            return response()->json(["status" => 422, "validateerror" => $validator -> errors()]);
+        if ($validator->fails()) { 
+            return response() -> json(["status" => 422, "validate_err" => $validator -> errors()]);
         } 
-        
+        // OOP Arrow
         else {
-            $data = new CateringModel();
-            $data -> first_name = $request -> input("first_name");
-            $data -> middle_name = $request -> input("middle_name");
-            $data -> last_name = $request -> input("last_name");
-            $data -> mobile_number = $request -> input("mobile_number");
-            $data -> email = $request -> input("email");
-            $data -> address_line1 = $request -> input("address_line1");
-            $data -> address_line2 = $request -> input("address_line2");
-            $data -> barangay = $request -> input("barangay");
-            $data -> city = $request -> input("city");
-            $data -> province = $request -> input("province");
-            $data -> region = $request -> input("region");
-            $data->save();
+            $customer = new CateringModel();
+            $customer -> first_name = $request -> input("first_name");
+            $customer -> middle_name = $request -> input("middle_name");
+            $customer -> last_name = $request -> input("last_name");
+            $customer -> mobile_number = $request -> input("mobile_number");
+            $customer -> email = $request -> input("email");
+            $customer -> address_line1 = $request -> input("address_line1");
+            $customer -> address_line2 = $request -> input("address_line2");
+            $customer -> barangay = $request -> input("barangay");
+            $customer -> city = $request -> input("city");
+            $customer -> province = $request -> input("province");
+            $customer -> region = $request -> input("region");
+            $customer->save();
             return response()->json(["status" => 200, "message" => "Customer Information added successfully!"]);
         }
     }
