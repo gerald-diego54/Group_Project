@@ -69,7 +69,7 @@ const AddCustomer = () => {
             <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}><br /><br />
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
                     {/* FieldSet 1 */}
-                    <img className='my-4' src={fieldset} />
+                    <img alt='' className='my-4' src={fieldset} />
                     <div style={{ position: "relative", bottom: 450 }}>
                         <form onSubmit={saveCustomer}>
                             <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
