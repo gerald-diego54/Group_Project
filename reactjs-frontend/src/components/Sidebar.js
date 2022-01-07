@@ -38,7 +38,7 @@ const Sidebar = () => {
                             <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 100 }}>Records</p>
                         </Link>
                     </div>
-                    <img style={{ position: 'relative', top: 30, left: -10, height: 280 }} src={imageDate} />
+                    <img alt='' style={{ position: 'relative', top: 30, left: -10, height: 280 }} src={imageDate} />
                 </div>
             </div>
             <div className='container float-end'>

@@ -59,11 +59,11 @@ const Event = () => {
             <Sidebar />
             <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}><br /><br />
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
-                    <img className='my-4' src={fieldset2} />
+                    <img alt='' className='my-4' src={fieldset2} />
                     {/* Fieldsets 2 */}
                     <form onSubmit={saveCustomer} style={{ position: "relative", bottom: 440 }}>
                         
-<div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
+                        <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                             <div className='col text-start'>
                                 {/* Event Type */}
                                 <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Event Type</label><br />
