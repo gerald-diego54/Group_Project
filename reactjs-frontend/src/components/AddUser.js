@@ -5,7 +5,7 @@ import fieldset from '../images/fieldset.svg';
 import '../css/style.css';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
-import {useNavigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 
 
 const AddUser = () => {
