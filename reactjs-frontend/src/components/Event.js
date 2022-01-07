@@ -21,11 +21,12 @@ const Event = () => {
     const handleChange = (e) => {
         setValue_event({ ...values_event, [e.target.name]: e.target.value });
     }
-
+    console.log(values_event);
     const saveCustomer = (e) => {
         e.preventDefault();
 
         const data = {
+            
             event_name: values_event.event_name,
             event_date: values_event.event_date,
             event_status: values_event.event_status,
@@ -36,14 +37,16 @@ const Event = () => {
             event_province: values_event.event_province,
             event_region: values_event.event_region
         }
-
-        axios.post("api/eventdata", data).then(response => {
+        console.log(data);
+        axios.post("api/event", data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
                 sweetAlert({
                     icon: "success",
                     title: response.data.message,
                     button: "Next"
+                }).then(response => {
+                    window.location.href = "/addrecord";
                 });
             }
             else if (response.data.status === 422) {
@@ -90,29 +93,29 @@ const Event = () => {
                             {/* Address */}
                             <div className='col text-start'>
                                 <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Event Address</label><br />
-                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_address_line1} onChange={handleChange} name='address_line1' type="text" className="form-control" placeholder="Blk/Lot/House#" aria-label="Blk/Lot/House#" />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_address_line1} onChange={handleChange} name='event_address_line1' type="text" className="form-control" placeholder="Blk/Lot/House#" aria-label="Blk/Lot/House#" />
                             </div>
                             <div className='col text-start'>
                                 <br />
-                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_address_line2} onChange={handleChange} name='address_line2' type="text" className="form-control" placeholder="Street" aria-label="Street" />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_address_line2} onChange={handleChange} name='event_address_line2' type="text" className="form-control" placeholder="Street" aria-label="Street" />
                             </div>
                             <div className='col text-start'>
                                 <br />
-                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_barangay} onChange={handleChange} name='barangay' type="text" className="form-control" placeholder="Barangay" aria-label="Barangay" />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_barangay} onChange={handleChange} name='event_barangay' type="text" className="form-control" placeholder="Barangay" aria-label="Barangay" />
                             </div>
                         </div>
                         <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                             <div className='col text-start'>
                                 <br />
-                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_city} onChange={handleChange} name='city' type="text" className="form-control" placeholder="City" aria-label="City" />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_city} onChange={handleChange} name='event_city' type="text" className="form-control" placeholder="City" aria-label="City" />
                             </div>
                             <div className='col text-start'>
                                 <br />
-                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_province} onChange={handleChange} name='province' type="text" className="form-control" placeholder="Province" aria-label="Province" />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_province} onChange={handleChange} name='event_province' type="text" className="form-control" placeholder="Province" aria-label="Province" />
                             </div>
                             <div className='col text-start'>
                                 <br />
-                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_region} onChange={handleChange} name='region' type="text" className="form-control" placeholder="Region" aria-label="Region" />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values_event.event_region} onChange={handleChange} name='event_region' type="text" className="form-control" placeholder="Region" aria-label="Region" />
                             </div>
                         </div>
                         <div className='row'>

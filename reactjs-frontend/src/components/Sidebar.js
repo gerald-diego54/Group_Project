@@ -6,7 +6,17 @@ import imageDate from '../images/image-1.svg';
 import title from '../images/title.svg';
 import profile from '../images/profile.svg';
 import "../css/style.css";
+import sweetAlert from 'sweetalert';
 
+const change = (e) => {
+    e.preventDefault();
+    sweetAlert({
+        icon: "success",
+        title: "You are logging out..."
+    }).then(response => {
+        window.location.href = "/";
+    })
+}
 
 const Sidebar = () => {
     return (
@@ -73,7 +83,7 @@ const Sidebar = () => {
                                         <div className='container rounded' style={{ backgroundColor: "#FDE9EC", width: 40, height: 40, marginRight: 100 }}>
                                             <i className="bi bi-box-arrow-right icon-color-logout" />
                                         </div>
-                                        <Link className='nav-link' to='/notification'><p className='fw-bold text-dark' style={{ position: "relative", bottom: 60, left: 40, fontSize: 18 }}>Log-out</p></Link>
+                                        <a type='button' className='nav-link' onClick={change}><p className='fw-bold text-dark' style={{ position: "relative", bottom: 60, left: 40, fontSize: 18 }}>Log-out</p></a>
                                         <p className='text-secondary' style={{ position: "relative", bottom: 83, left: 53, fontSize: 12 }}>Log out sessions.</p>
                                     </div>
                                 </div>

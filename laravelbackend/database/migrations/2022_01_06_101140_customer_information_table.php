@@ -14,13 +14,11 @@ class CustomerInformationTable extends Migration
     public function up()
     {
         Schema::create('customer_info_table', function (Blueprint $table) {
-            // $table -> engine = "InnoDB";
             $table->id("customer_id");
-            $table->unsignedBigInteger('event_id');
             $table->string("first_name");
             $table->string("middle_name");
             $table->string("last_name");
-            $table->integer("mobile_number");
+            $table->string("mobile_number");
             $table->string("email");
             $table->string("address_line1");
             $table->string("address_line2");
@@ -28,7 +26,6 @@ class CustomerInformationTable extends Migration
             $table->string("city");
             $table->string("province");
             $table->string("region");
-            $table->foreign('event_id') -> references('event_id')->on('event_info_table')->onDelete('cascade');
             $table->timestamps();
         });
     }
