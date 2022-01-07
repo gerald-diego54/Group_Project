@@ -16,7 +16,7 @@ class EventInfoTable extends Migration
         //
         Schema::create('event_info_table', function (Blueprint $table) {
             // $table->id();
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('id');
             $table-> string("event_name");
             $table-> date("event_date");
             $table-> string("event_status");
@@ -26,7 +26,7 @@ class EventInfoTable extends Migration
             $table-> string("event_city");
             $table-> string("event_province");
             $table-> string("event_region");
-            $table->foreign('customer_id')->references('customer_id')->on('customer_info_table')->onDelete('restrict');
+            $table->foreign('id')->references('id')->on('customer_info_table')->onDelete('cascade');
             $table->timestamps();
         });
     }

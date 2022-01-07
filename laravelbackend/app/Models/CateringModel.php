@@ -14,7 +14,7 @@ class CateringModel extends Model
 
     // Protected Fillable
     protected $fillable = [
-        "customer_id",
+        "id",
         "first_name",
         "middle_name",
         "last_name",

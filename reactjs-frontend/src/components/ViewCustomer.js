@@ -13,15 +13,16 @@ const ViewCustomer = () => {
                 setCustomer(res.data.customer);
                 setLoading(false);
             }
-            console.log(res.data.status);
+        
         })
         
     },[]);
     const deleteCustomer=(e,id)=>{
         e.preventDefault();
+        console.log(id);
         const delClick = e.currentTarget;
         delClick.innerText = 'Deleting..';
-        axios.delete(`api/deleteCustomer/${id}`).then(
+        axios.delete(`api/deletecustomer/${id}` ,`api/deleteEvents/${id}`).then(
             res=>{
                 if(res.data.status===200){
                     swal('Data Deleted',res.data.message);
@@ -31,9 +32,11 @@ const ViewCustomer = () => {
                     delClick.innerText='Delete';
 
                 }
-
+               
             }
+            
         );
+        
     }
     if(loading){
         return <h4> Loading Customer Data </h4>

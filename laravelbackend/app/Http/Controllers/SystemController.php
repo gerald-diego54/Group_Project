@@ -81,8 +81,29 @@ class SystemController extends Controller{
         }
     }
 
-
-
+    public function deleteCustomer($id){
+        $customer = CateringModel::find($id);
+        $events = EventModel::find($id);
+        if($customer){
+            $customer-> delete();
+            $events-> delete();
+            return response()->json(['status'=>200,"message"=>'Product deleted successfully!']);
+        }
+        else{
+            return response()->json(['status'=>404,"message"=>'No product ID found!']);
+        }
+    }
+    public function deleteEvents($id){
+        $events = EventModel::find($id);
+        if($events){
+            $events-> delete();
+            return response()->json(['status'=>200,"message"=>'Product deleted successfully!']);
+        }
+        else{
+            return response()->json(['status'=>404,"message"=>'No product ID found!']);
+        }
+    }
+    
 
     public function create_event(Request $request){
         //This block will create a record for the customer event 

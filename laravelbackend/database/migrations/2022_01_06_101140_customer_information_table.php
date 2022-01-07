@@ -14,7 +14,7 @@ class CustomerInformationTable extends Migration
     public function up()
     {
         Schema::create('customer_info_table', function (Blueprint $table) {
-            $table->id("customer_id");
+            $table->bigIncrements("id");
             $table->string("first_name");
             $table->string("middle_name");
             $table->string("last_name");
