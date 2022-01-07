@@ -74,7 +74,7 @@ const LogIn = () => {
                             <div className="col-5">
                                 <div className="form-floating w-100 mx-3">
                                     <input type="text" className="form-control" name="username" placeholder="name@example.com" required />
-                                    <label htmlFor="floatingInput" className="form-label">Username</label>
+                                    <label htmlFor="floatingInput" className="form-label">email</label>
                                 </div>
                             </div>
                         </div><br />

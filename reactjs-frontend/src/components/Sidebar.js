@@ -89,8 +89,8 @@ const Sidebar = () => {
                                         <div className='container rounded' style={{ backgroundColor: "rgba(0, 168, 191, 0.2)", width: 40, height: 40, marginRight: 100 }}>
                                             <i className="bi bi-gear-fill icon-color-settings" />
                                         </div>
-                                        <Link className='nav-link' to='/notification'><p className='fw-bold text-dark' style={{ position: "relative", bottom: 60, left: 44, fontSize: 18 }}>Settings</p></Link>
-                                        <p className='text-secondary' style={{ position: "relative", bottom: 83, left: 95, fontSize: 12, textAlign: "left" }}>Modify user name and password</p>
+                                        <Link className='nav-link' to='/notification'><p className='fw-bold text-dark' style={{ position: "relative", bottom: 60, left: 44, fontSize: 18 }}> Setting</p></Link>
+                                        <p className='text-secondary' style={{ position: "relative", bottom: 83, left: 95, fontSize: 12, textAlign: "left" }}>Modify user name or password</p>
                                     </div>
                                 </div>
                             </div>
