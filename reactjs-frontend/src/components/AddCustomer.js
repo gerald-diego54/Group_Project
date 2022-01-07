@@ -56,8 +56,9 @@ const AddCustomer = () => {
             }
             else if (response.data.status === 422){
                 sweetAlert({
-                    icon: "error",
-                    title: response.data.validate_err
+                    icon: "info",
+                    title: response.data.message
+                    
                 });
             }
         });

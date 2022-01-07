@@ -8,8 +8,43 @@ use App\Models\EventModel;
 
 class SystemController extends Controller{
 
+    //This function will return the data of Customer
+    Public function showCustomer(){ //similar to index
+        $Customer = CateringModel::all();
+        return response()->json(['status'=>200,"customer"=>$Customer]);
+    }
+
+    //This function will return the events of the customer
+    Public function showEvents(){
+        $Events = EventModel::all();
+        return response()->json(['statys'=>200,"events"=>$Events]);
+
+    }
+
+    //This block will edit the customer based on ID.
+    public function editCustomer($id){
+        $Customer = CateringModel::find($id);
+        if($Customer){
+            return response()->json(['status'=>200,"customer"=>$Customer]);
+        }
+        else{
+            return response()->json(['status'=>404,"message"=>'No customer ID found!']);
+        }
+    }
+
+     //This block will edit the customer Events based on ID.
+     public function editEvents($id){
+        $Events = EventModel::find($id);
+        if($Events){
+            return response()->json(['status'=>200,"events"=>$Events]);
+        }
+        else{
+            return response()->json(['status'=>404,"message"=>'No customer ID found!']);
+        }
+    }
 
     public function create(Request $request){
+        //This block will create a new record
         $validator = Validator::make($request -> all(), [
             "first_name" => "required",
             "middle_name" => "required",
@@ -24,9 +59,10 @@ class SystemController extends Controller{
             "region" => "required"
         ]);
         if ($validator->fails()) { 
-            return response() -> json(["status" => 422, "validate_err" => $validator -> errors()]);
+            return response() -> json(["status" => 422, "message" => "Error! , Please fill out the missing fields."]);
+            
         } 
-        // OOP Arrow
+        // if validations are not met , proceed to this line
         else {
             $customer = new CateringModel();
             $customer -> first_name = $request -> input("first_name");
@@ -45,8 +81,11 @@ class SystemController extends Controller{
         }
     }
 
-// Create data [event_info_table]
+
+
+
     public function create_event(Request $request){
+        //This block will create a record for the customer event 
         $validator = Validator::make($request -> all(), [
             "event_name" => "required",
             "event_date"  => "required",
@@ -61,8 +100,8 @@ class SystemController extends Controller{
         if ($validator->fails()) { 
             return response() -> json(["status" => 422, "validate_err" => $validator -> errors()]);
         } 
-        // OOP Arrow
         else {
+            //if the conditions !=true then will proceed to this block
             $customer = new EventModel();
             $customer -> event_name = $request -> input("event_name");
             $customer -> event_date = $request -> input("event_date");

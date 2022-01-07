@@ -37,15 +37,15 @@ const Sidebar = () => {
                         </Link>
                     </div>
                     <div className='col'>
-                        <Link className='link-decoration' to={"/dashboard"}>
+                        <Link className='link-decoration' to={"/customerStatus"}>
                             <i className="bi bi-person-lines-fill icon-color py-4" />
                             <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 20 }}>Customer Status</p>
                         </Link>
                     </div>
                     <div className='col'>
-                        <Link className='link-decoration' to={"/records"}>
+                        <Link className='link-decoration' to={"/viewcustomer"}>
                             <i className="bi bi-clipboard-data icon-color py-4" />
-                            <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 100 }}>Records</p>
+                            <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 100 }}>View Customer</p>
                         </Link>
                     </div>
                     <img alt='' style={{ position: 'relative', top: 30, left: -10, height: 280 }} src={imageDate} />
