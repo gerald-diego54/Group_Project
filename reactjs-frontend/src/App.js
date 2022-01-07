@@ -8,6 +8,7 @@ import LogIn from './components/LogIn';
 import AddCustomer from './components/AddCustomer';
 import axios from 'axios';
 import Event from './components/Event';
+import AddUser from './components/AddUser';
 
 axios.defaults.baseURL = "http://localhost:8000/";
 
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/dashboard" element={<Dashboard />}></Route>
           <Route exact path="/addrecord" element={<AddCustomer />}></Route>
           <Route exact path="/event" element={<Event />}></Route>
+          <Route exact path="/adduser" element={<AddUser />}></Route>
         </Routes>
       </Router>
     </div>
