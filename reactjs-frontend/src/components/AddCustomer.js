@@ -5,13 +5,9 @@ import fieldset from '../images/fieldset.svg';
 import '../css/style.css';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
-import {useNavigate} from 'react-router-dom';
-
-
-
 
 const AddCustomer = () => {
-    const navigate = useNavigate(); //unused
+    
     const [values, setValue] = useState({
         first_name: "",
         middle_name: "",
@@ -53,7 +49,7 @@ const AddCustomer = () => {
                 sweetAlert({
                     icon: "success",
                     title: response.data.message,
-                    button: "Next"
+                    button: "Submit"
                 }).then(response => {
                     window.location.href = "/event";
                 })
@@ -98,7 +94,7 @@ const AddCustomer = () => {
                                 <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                                     <div className='col text-start'>
                                         <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Phone Number</label><br />
-                                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.mobile_number} onChange={handleChange} name='mobile_number' type="number" className="form-control" placeholder="Phone number" aria-label="Phone number" min={11} />
+                                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.mobile_number} onChange={handleChange} name='mobile_number' type="number" className="form-control" placeholder="Phone number" aria-label="Phone number" />
                                     </div>
                                     {/* Email Address */}
                                     <div className='col text-start'>

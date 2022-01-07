@@ -12,6 +12,7 @@ class EventModel extends Model
 
     // Protected Fillable
     protected $fillable = [
+        "event_id",
         "event_name",
         "event_date",
         "event_status",

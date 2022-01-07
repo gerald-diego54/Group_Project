@@ -16,6 +16,8 @@ use App\Http\Controllers\SystemController;
 */
 // Route::post("/loginvalidate", [SystemController::class, "authenticatelogin"]);
 Route::post("/customerinfo", [SystemController::class, "create"]);
+Route::post("/event", [SystemController::class, "create_event"]);
+
 
 
 

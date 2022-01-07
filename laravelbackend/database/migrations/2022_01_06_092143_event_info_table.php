@@ -15,7 +15,7 @@ class EventInfoTable extends Migration
     {
         //
         Schema::create('event_info_table', function (Blueprint $table) {
-            $table->id();
+            $table->id("event_id");
             $table-> string("event_name");
             $table-> date("event_date");
             $table-> string("event_status");

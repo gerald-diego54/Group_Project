@@ -9,7 +9,7 @@ class UserCateringModel extends Model
 {
     use HasFactory;
 
-    protected $table = "System_user";
+    protected $table = "sytem_user_table";
 
     protected $fillable = [
         "first_name",

@@ -13,16 +13,6 @@ class SytemUserTable extends Migration
      */
     public function up()
     {
-        //
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
         Schema::create('sytem_user_table', function (Blueprint $table) {
             $table->id();
             $table->string("first_name");
@@ -32,5 +22,15 @@ class SytemUserTable extends Migration
             $table->string("user_role");
             $table->timestamps();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('sytem_user_table');
     }
 }
