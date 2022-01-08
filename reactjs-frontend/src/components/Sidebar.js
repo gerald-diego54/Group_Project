@@ -45,7 +45,7 @@ const Sidebar = () => {
                     <div className='col'>
                         <Link className='link-decoration' to={"/viewcustomer"}>
                             <i className="bi bi-clipboard-data icon-color py-4" />
-                            <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 100 }}>View Customer</p>
+                            <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 140, width: 400 }}>View Customer</p>
                         </Link>
                     </div>
                     <img alt='' style={{ position: 'relative', top: 30, left: -10, height: 280 }} src={imageDate} />
@@ -59,7 +59,7 @@ const Sidebar = () => {
                 </div>
                 <div className='row'>
                     <div className='col'><br />
-{/* Notification */}
+                        {/* Notification */}
                         <div className="card shadow bg-body rounded" style={{ marginLeft: 10, border: 0 }}>
                             <div className="card-body py-4" style={{ height: 90 }}>
                                 <div className='row'>
@@ -68,13 +68,13 @@ const Sidebar = () => {
                                             <i className="bi bi-bell-fill icon-color-notif" />
                                         </div>
                                         <Link className='nav-link' to='/notification'><p className='fw-bold text-dark' style={{ position: "relative", bottom: 60, left: 60, fontSize: 18 }}>Notifications</p></Link>
-                                        <p className='text-secondary' style={{ position: "relative", bottom: 83, left: 90, fontSize: 12, textAlign: "left"}}>Announcements are<br /> posted here</p>
+                                        <p className='text-secondary' style={{ position: "relative", bottom: 83, left: 90, fontSize: 12, textAlign: "left" }}>Announcements are<br /> posted here</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-{/* Log Out */}
+                    {/* Log Out */}
                     <div className='col'><br />
                         <div className="card shadow bg-body rounded" style={{ marginLeft: 10, border: 0 }}>
                             <div className="card-body py-4" style={{ height: 90 }}>
@@ -83,14 +83,14 @@ const Sidebar = () => {
                                         <div className='container rounded' style={{ backgroundColor: "#FDE9EC", width: 40, height: 40, marginRight: 100 }}>
                                             <i className="bi bi-box-arrow-right icon-color-logout" />
                                         </div>
-                                        <a  type='button' className='nav-link' onClick={change}><p className='fw-bold text-dark' style={{ position: "relative", bottom: 60, left: 40, fontSize: 18 }}>Log-out</p></a>
+                                        <a type='button' className='nav-link' onClick={change}><p className='fw-bold text-dark' style={{ position: "relative", bottom: 60, left: 40, fontSize: 18 }}>Log-out</p></a>
                                         <p className='text-secondary' style={{ position: "relative", bottom: 83, left: 53, fontSize: 12 }}>Log out sessions.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-{/* Settings */}
+                    {/* Settings */}
                     <div className='col'><br />
                         <div className="card shadow bg-body rounded" style={{ marginLeft: 10, border: 0 }}>
                             <div className="card-body py-4" style={{ height: 90 }}>
