@@ -39,7 +39,7 @@ const ViewCustomer = () => {
 
     }
     if (loading) {
-        return <h4> Loading Customer Data </h4>
+        var whileLoading = " Loading Customer Data";
     } else {
         var customer_HTMLTABLE = "";
         customer_HTMLTABLE = customer.map((item, index) => {
@@ -59,19 +59,16 @@ const ViewCustomer = () => {
     return (
         <div>
             <Sidebar />
-
             <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}><br /><br />
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
-                    {/* <div style={{ position: "relative", bottom: 450 }}>
-                            
-                        </div> */}
                     <div className='container'>
+                        <h2>{whileLoading}</h2>
                         <div className="card">
                             <div className="card-header">
                                 <h4>View Customer</h4>
                             </div>
-                            <div className="card-body" style={{paddingLeft: 80}}>
-                                <div className='table' style={{width: 800, height: 400, overflowY: 'scroll'}}>
+                            <div className="card-body" style={{ paddingLeft: 80 }}>
+                                <div className='table' style={{ width: 800, height: 400, overflowY: 'scroll' }}>
                                     <table className='table table-striped table-danger'>
                                         <thead>
                                             <tr>
@@ -79,8 +76,7 @@ const ViewCustomer = () => {
                                                 <th>Name</th>
                                                 <th>Mobile Number</th>
                                                 <th>Address</th>
-                                                <th>Action</th>
-
+                                                <th>Action</th> 
                                             </tr>
                                         </thead>
                                         <tbody>

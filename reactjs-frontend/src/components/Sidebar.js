@@ -37,7 +37,7 @@ const Sidebar = () => {
                         </Link>
                     </div>
                     <div className='col'>
-                        <Link className='link-decoration' to={"/customerStatus"}>
+                        <Link className='link-decoration' to={"/customerstatus"}>
                             <i className="bi bi-person-lines-fill icon-color py-4" />
                             <p className='fs-5 fw-bold' style={{ paddingTop: 26, paddingRight: 20 }}>Customer Status</p>
                         </Link>

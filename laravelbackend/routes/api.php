@@ -11,6 +11,7 @@ Route::get('/customer',[SystemController::class,"showCustomer"]); // will show c
 Route::get('/editcustomer/{id}',[SystemController::class, 'editCustomer']); //will edit customer 
 Route::put('/updatecustomer/{id}',[SystemController::class, 'updateCustomer']); // will update customer 
 Route::delete('/deletecustomer/{id}',[SystemController::class, 'deleteCustomer']); // will delete customer 
+Route::get("/editproduct/{id}", [SystemController::class, "edit"]);
 
 
 
