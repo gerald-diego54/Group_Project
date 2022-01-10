@@ -10,10 +10,9 @@ import axios from 'axios';
 import Event from './components/Event';
 import AddUser from './components/AddUser';
 import ViewCustomer from './components/ViewCustomer';
-import CustomerStatus from './components/CustomerStatus';
 import EditEvent from './components/EditEvent';
 import EditCustomer from './components/EditCustomer';
-
+import ViewCustomerStatus from './components/ViewCustomerStatus'
 axios.defaults.baseURL = "http://localhost:8000/";
 
 function App() {
@@ -29,8 +28,8 @@ function App() {
           <Route exact path="/event" element={<Event />}></Route>
           <Route exact path="/adduser" element={<AddUser />}></Route>
           <Route exact path="/viewcustomer" element={<ViewCustomer />}></Route>
-          <Route exact path="/customerstatus" element={<CustomerStatus />}></Route>
-        
+          <Route exact path="/viewcustomerstatus" element={<ViewCustomerStatus />}></Route>
+
 
         </Routes>
       </Router>
