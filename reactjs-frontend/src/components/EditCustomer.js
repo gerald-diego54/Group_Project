@@ -12,61 +12,65 @@ function EditCustomer() {
     const navigate = useNavigate();
     const [values, setValues] = useState([]);
     const [loading, setLoading] = useState(true);
-    const {id} = useParams();
+    const { id } = useParams();
 
 
-  const handleChange = (e) => {
-    setValues({...values, [e.target.name]: e.target.value});
-}
+    const handleChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    }
 
-useEffect(() => {
-    const customer_id = id;
-    axios.get(`api/editcustomer/${customer_id}`).then(
-        response => {
+    useEffect(() => {
+        const customer_id = id;
+        axios.get(`api/editcustomer/${customer_id}`).then(
+            response => {
+                if (response.data.status === 200) {
+                    setValues(response.data.customer);
+                    setLoading(false);
+                }
+                else if (response.data.status === 404) {
+                    sweetAlert('error', response.data.message).then(response => {
+                        window.location.href = "/editcustomer";
+                    });
+                }
+            });
+    }, [id]);
+
+    const updateCustomer = (e) => {
+        e.preventDefault();
+        const data = {
+            first_name: values.first_name,
+            middle_name: values.middle_name,
+            last_name: values.last_name,
+            mobile_number: values.mobile_number,
+            email: values.email,
+            address_line1: values.address_line1,
+            address_line2: values.address_line2,
+            barangay: values.barangay,
+            city: values.city,
+            province: values.province,
+            region: values.region
+        }
+        axios.put(`api/updatecustomer/${id}`, data).then(response => {
+            // console.log(response.data.status);
             if (response.data.status === 200) {
-                setValues(response.data.customer);
-                setLoading(false);
+                sweetAlert({
+                    icon: "success",
+                    title: response.data.message
+                }).then(response => {
+                    window.location.href = "/editevent";
+                });
+
+
+            }
+            else if (response.data.status === 422) {
+                // console.log(response.data.status);
+                sweetAlert("Error Code: 422");
             }
             else if (response.data.status === 404) {
-                sweetAlert('error', response.data.message).then(response => {
-                    window.location.href = "/editcustomer";
-                });
+                sweetAlert("All fields are mandatory!", "");
             }
-    });
-}, [id]);
-
-const updateCustomer = (e) => {
-    e.preventDefault();
-    const data = {
-        first_name: values.first_name,
-        middle_name: values.middle_name,
-        last_name: values.last_name,
-        mobile_number: values.mobile_number,
-        email: values.email,
-        address_line1: values.address_line1,
-        address_line2: values.address_line2,
-        barangay: values.barangay,
-        city: values.city,
-        province: values.province,
-        region: values.region
+        });
     }
-    axios.put(`api/updatecustomer/${id}`, data).then(response => {
-        // console.log(response.data.status);
-        if (response.data.status === 200) {
-            sweetAlert("Success", response.data.message);
-            window.location.href = "/editevent";
-           
-          
-        }
-        else if (response.data.status === 422) {
-            // console.log(response.data.status);
-            sweetAlert("Error Code: 422");
-        }
-        else if (response.data.status === 404) {
-            sweetAlert("All fields are mandatory!", ""); 
-        }
-    });
-}
 
 
 
@@ -78,7 +82,7 @@ const updateCustomer = (e) => {
                     {/* FieldSet 1 */}
                     <img alt='' className='my-4' src={fieldset} />
                     <div style={{ position: "relative", bottom: 450 }}>
-                    
+
                         <form onSubmit={updateCustomer}>
                             <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                                 <div className='col text-start'>
@@ -138,7 +142,7 @@ const updateCustomer = (e) => {
                                     <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.region} onChange={handleChange} name='region' type="text" className="form-control" placeholder="Region" aria-label="Region" />
                                 </div>
                             </div>
-                            <button type="submit" id='btn-next'  style={{ width: 200 }} className='btn btn-outline-primary btn-pos'>Next</button>
+                            <button type="submit" id='btn-next' style={{ width: 200 }} className='btn btn-outline-primary btn-pos'>Next</button>
                         </form>
                     </div>
                 </div>
