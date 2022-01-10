@@ -29,7 +29,7 @@ const AddCustomer = () => {
 
     const saveCustomer = (e) => {
         e.preventDefault();
-
+        
         const data = {
             first_name: values.first_name,
             middle_name: values.middle_name,
@@ -43,7 +43,7 @@ const AddCustomer = () => {
             province: values.province,
             region: values.region
         }
-
+        console.log(data);
         axios.post("api/customerinfo", data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
