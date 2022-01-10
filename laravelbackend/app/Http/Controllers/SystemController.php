@@ -116,9 +116,11 @@ class SystemController extends Controller
                 $customer->province = $request->input("province");
                 $customer->region = $request->input("region");
                 $customer->update();
+                return response()->json(["status" => 200, "message" => "Customer Information Updated Successfully."]);
             }
            else{
-            return response()->json(["status" => 200, "message" => "Customer Information Updated Successfully."]);
+            return response()->json(["status" => 422, "message" => "Customer Information Update Erro!"]);
+
            }        
         } 
     }

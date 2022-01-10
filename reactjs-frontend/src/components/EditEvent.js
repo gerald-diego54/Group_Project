@@ -12,7 +12,7 @@ function EditEvent() {
     // const [loading, setLoading] = useState(true);
     const { id } = useParams();
 
-
+    console.log(values_event);
     const handleChange = (e) => {
         setValues({ ...values_event, [e.target.name]: e.target.value });
     }
