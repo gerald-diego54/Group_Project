@@ -57,7 +57,7 @@ function EditCustomer() {
                     icon: "success",
                     title: response.data.message
                 }).then(response => {
-                    window.location.href = "/editevent";
+                    window.location.href = `/viewcustomer/editevent/${id}`
                 });
 
 

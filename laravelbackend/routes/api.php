@@ -9,7 +9,7 @@ Route::post("/customerinfo", [SystemController::class, "create"]); // will post 
 Route::post("/event", [SystemController::class, "create_event"]); // will post new event for customer 
 Route::get('/customer',[SystemController::class,"showCustomer"]); // will show customer data.
 Route::get('/editcustomer/{id}',[SystemController::class, 'editCustomer']); //will edit customer 
-Route::get('/editevents/{id}',[SystemController::class,'editEvents']); // wwill edit events
+Route::get('/editevent/{id}',[SystemController::class,'editEvents']); // wwill edit events
 Route::get('/updateevent/{id}',[SystemController::class,'updateEvents']); //Will edit the update events 
 Route::put('/updatecustomer/{id}',[SystemController::class, 'updateCustomer']); // will update customer 
 Route::delete('/deletecustomer/{id}',[SystemController::class, 'deleteCustomer']); // will delete customer 

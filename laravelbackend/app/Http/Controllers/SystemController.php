@@ -38,9 +38,9 @@ class SystemController extends Controller
     //This block will edit the customer Events based on ID.
     public function editEvents($id)
     {
-        $Events = EventModel::find($id);
-        if ($Events) {
-            return response()->json(['status' => 200, "events" => $Events]);
+        $events = EventModel::find($id);
+        if ($events) {
+            return response()->json(['status' => 200, "events" => $events]);
         } else {
             return response()->json(['status' => 404, "message" => 'No customer ID found!']);
         }

@@ -16,12 +16,14 @@ function EditEvent() {
     const handleChange = (e) => {
         setValues({ ...values_event, [e.target.name]: e.target.value });
     }
-
+    console.log(values_event);
+    
     useEffect(() => {
         const customer_id = id;
-        axios.get(`api/editevents/${customer_id}`).then(response => {
+        axios.get(`api/editevent/${customer_id}`).then(response => {
+          console.log("test ",response.data.events);
             if (response.data.status === 200) {
-                setValues(response.data.event);
+                setValues(response.data.events);
                 // setLoading(false);
             }
             else if (response.data.status === 404) {
