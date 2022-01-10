@@ -68,7 +68,7 @@ const ViewCustomerStatus = () => {
                                 <h4>Customer Status</h4>
                             </div>
                             <div className="card-body" style={{ paddingLeft: 80 }}>
-                                <div className='table' style={{ width: 800, height: 400, overflowX: 'scroll' }}>
+                                <div className='table' style={{ width: 800, height: 400, overflow: 'scroll' }}>
                                     <table className='table table-striped table-danger table-responsive'>
                                         <thead>
                                             <tr>
