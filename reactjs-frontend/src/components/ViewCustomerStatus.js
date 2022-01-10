@@ -65,18 +65,22 @@ const ViewCustomerStatus = () => {
                         <h2>{whileLoading}</h2>
                         <div className="card">
                             <div className="card-header">
-                                <h4>View Customer</h4>
+                                <h4>Customer Status</h4>
                             </div>
                             <div className="card-body" style={{ paddingLeft: 80 }}>
-                                <div className='table' style={{ width: 800, height: 400, overflowY: 'scroll' }}>
-                                    <table className='table table-striped table-danger'>
+                                <div className='table' style={{ width: 800, height: 400, overflow: 'scroll' }}>
+                                    <table className='table table-striped table-danger table-responsive'>
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Name</th>
-                                                <th>Mobile Number</th>
-                                                <th>Address</th>
-                                                <th>Action</th> 
+                                                <th>Event</th>
+                                                <th>Date</th>
+                                                <th>Payment</th> 
+                                                <th>Payment Status</th> 
+                                                <th>Event Status</th> 
+                                                <th>Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
