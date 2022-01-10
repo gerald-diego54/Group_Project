@@ -50,25 +50,16 @@ function EditEvent() {
         axios.put(`api/updateevent/${id}`, data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
-                sweetAlert({
-                    icon: "success",
-                    title: response.data.message
-                }).then(response => {
+                sweetAlert("Success", response.data.message).then(response => {
                     window.location.href = "/viewcustomer";
                 })
             }
             else if (response.data.status === 422) {
                 // console.log(response.data.status);
-                sweetAlert({
-                    icon: "info",
-                    title: "Required Fields!"
-                });
+                sweetAlert("Error Code: 422");
             }
             else if (response.data.status === 404) {
-                sweetAlert({
-                    icon: "error",
-                    title: "Not Found!"
-                });
+                sweetAlert("All fields are mandatory!", "");
             }
         });
     }
