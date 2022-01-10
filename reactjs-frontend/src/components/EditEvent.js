@@ -23,13 +23,13 @@ function EditEvent() {
         axios.get(`api/editevent/${customer_id}`).then(response => {
           console.log("test ",response.data.events);
             if (response.data.status === 200) {
-                setValues(response.data.events);
+                setValues(response.data.events).then(response => {
+                    window.location.href = "/viewcustomer";
+                });
                 // setLoading(false);
             }
             else if (response.data.status === 404) {
-                sweetAlert('error', response.data.message).then(response => {
-                    window.location.href = "/viewcustomer";
-                });
+                sweetAlert('error', response.data.message);
             }
         });
     }, [id]);

@@ -13,9 +13,7 @@ const ViewCustomer = () => {
                 setCustomer(res.data.customer);
                 setLoading(false);
             }
-
-        })
-
+        });
     }, []);
     const deleteCustomer = (e, id) => {
         e.preventDefault();
