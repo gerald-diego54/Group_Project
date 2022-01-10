@@ -119,7 +119,43 @@ class SystemController extends Controller
                 return response()->json(["status" => 200, "message" => "Customer Information Updated Successfully."]);
             }
            else{
-            return response()->json(["status" => 422, "message" => "Customer Information Update Erro!"]);
+            return response()->json(["status" => 422, "message" => "Customer Information Update Error!"]);
+
+           }        
+        } 
+    }
+      //Updating events function
+      public function updateEvents(Request $request ,$id){
+        $validator = Validator::make($request-> all(),[
+            "event_name" => "required",
+            "event_date"  => "required",
+            "event_status"  => "required",
+            "event_address_line1" => "required",
+            "event_address_line2"  => "required",
+            "event_barangay" => "required",
+            "event_city" => "required",
+            "event_province" => "required",
+            "event_region" => "required"
+        ]);  
+        if($validator->fails()){
+            return response()->json(['status'=>422,"validationError"=>$validator->errors()]);
+        }else{
+            $customer = EventModel::find($id);
+            if ($customer){
+                $customer->event_name = $request->input("event_name");
+                $customer->event_date = $request->input("event_date");
+                $customer->event_status = $request->input("event_status");
+                $customer->event_address_line1 = $request->input("event_address_line1");
+                $customer->event_address_line2 = $request->input("event_address_line2");
+                $customer->event_barangay = $request->input("event_barangay");
+                $customer->event_city = $request->input("event_city");
+                $customer->event_province = $request->input("event_province");
+                $customer->event_region = $request->input("event_region");
+                $customer->update();
+                return response()->json(["status" => 200, "message" => "Customer event Updated Successfully."]);
+            }
+           else{
+            return response()->json(["status" => 422, "message" => "Customer event Update Error!"]);
 
            }        
         } 
