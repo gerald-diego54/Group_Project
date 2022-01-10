@@ -43,7 +43,11 @@ const AddCustomer = () => {
             region: values.region
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         console.log(data);
+=======
+       
+>>>>>>> parent of 5d91baa (UI Design moded)
 =======
        
 >>>>>>> parent of 5d91baa (UI Design moded)

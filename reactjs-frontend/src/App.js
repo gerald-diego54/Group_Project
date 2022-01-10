@@ -29,9 +29,15 @@ function App() {
           <Route exact path="/adduser" element={<AddUser />}></Route>
           <Route exact path="/viewcustomer" element={<ViewCustomer />}></Route>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Route exact path="/payment" element={<Payment />}></Route>
           <Route exact path="/cashway" element={<Cash />}></Route>
           <Route exact path="/chequeway" element={<Cheque />}></Route>
+=======
+          <Route exact path="/customerstatus" element={<CustomerStatus />}></Route>
+        
+
+>>>>>>> parent of 5d91baa (UI Design moded)
 =======
           <Route exact path="/customerstatus" element={<CustomerStatus />}></Route>
         
