@@ -10,7 +10,6 @@ import axios from 'axios';
 import Event from './components/Event';
 import AddUser from './components/AddUser';
 import ViewCustomer from './components/ViewCustomer';
-import CustomerStatus from './components/CustomerStatus';
 import EditEvent from './components/EditEvent';
 import EditCustomer from './components/EditCustomer';
 import Payment from './components/Payment';
@@ -32,7 +31,6 @@ function App() {
           <Route exact path="/event" element={<Event />}></Route>
           <Route exact path="/adduser" element={<AddUser />}></Route>
           <Route exact path="/viewcustomer" element={<ViewCustomer />}></Route>
-          <Route exact path="/customerstatus" element={<CustomerStatus />}></Route>
           <Route exact path="/payment" element={<Payment />}></Route>
           <Route exact path="/cashway" element={<Cash />}></Route>
           <Route exact path="/chequeway" element={<Cheque />}></Route>
