@@ -19,7 +19,7 @@ function EditEvent() {
 
     useEffect(() => {
         const customer_id = id;
-        axios.get(`api/editevent/${customer_id}`).then(response => {
+        axios.get(`api/editevents/${customer_id}`).then(response => {
             if (response.data.status === 200) {
                 setValues(response.data.event);
                 // setLoading(false);
