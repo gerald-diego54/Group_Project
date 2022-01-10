@@ -42,15 +42,6 @@ const AddCustomer = () => {
             province: values.province,
             region: values.region
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        console.log(data);
-=======
-       
->>>>>>> parent of 5d91baa (UI Design moded)
-=======
-       
->>>>>>> parent of 5d91baa (UI Design moded)
         axios.post("api/customerinfo", data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
