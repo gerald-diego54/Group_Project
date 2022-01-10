@@ -5,11 +5,14 @@ import fieldset from '../images/fieldset.svg';
 import '../css/style.css';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
-import { useParams } from 'react-router-dom';
-function EditForm() {
-  const [values, setValues] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const {id} = useParams();
+import { useNavigate, useParams } from 'react-router-dom';
+
+
+function EditCustomer() {
+    const navigate = useNavigate();
+    const [values, setValues] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const {id} = useParams();
 
 
   const handleChange = (e) => {
@@ -18,16 +21,17 @@ function EditForm() {
 
 useEffect(() => {
     const customer_id = id;
-    axios.get(`api/editcustomer/${customer_id}`).then(response => {
-        if (response.data.status === 200) {
-            setValues(response.data.customer);
-            setLoading(false);
-        }
-        else if (response.data.status === 404) {
-            sweetAlert('error', response.data.message).then(response => {
-                window.location.href = "";
-            });
-        }
+    axios.get(`api/editcustomer/${customer_id}`).then(
+        response => {
+            if (response.data.status === 200) {
+                setValues(response.data.customer);
+                setLoading(false);
+            }
+            else if (response.data.status === 404) {
+                sweetAlert('error', response.data.message).then(response => {
+                    window.location.href = "/editcustomer";
+                });
+            }
     });
 }, [id]);
 
@@ -47,11 +51,12 @@ const updateCustomer = (e) => {
         region: values.region
     }
     axios.put(`api/updatecustomer/${id}`, data).then(response => {
-        console.log(response.data.status);
+        // console.log(response.data.status);
         if (response.data.status === 200) {
-            sweetAlert("Success", response.data.message).then(response => {
-                window.location.href = "/editevent";
-            })
+            sweetAlert("Success", response.data.message);
+            window.location.href = "/editevent";
+           
+          
         }
         else if (response.data.status === 422) {
             // console.log(response.data.status);
@@ -133,7 +138,7 @@ const updateCustomer = (e) => {
                                     <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.region} onChange={handleChange} name='region' type="text" className="form-control" placeholder="Region" aria-label="Region" />
                                 </div>
                             </div>
-                            <button type="submit" id='btn-next' style={{ width: 200 }} className='btn btn-outline-primary btn-pos'>Next</button>
+                            <button type="submit" id='btn-next'  style={{ width: 200 }} className='btn btn-outline-primary btn-pos'>Next</button>
                         </form>
                     </div>
                 </div>
@@ -143,4 +148,4 @@ const updateCustomer = (e) => {
     )
 }
 
-export default EditForm
+export default EditCustomer

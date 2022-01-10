@@ -67,7 +67,7 @@ class SystemController extends Controller
         }
         // if validations are not met , proceed to this line
         else {
-            $customer = new CateringModel();
+            $customer = new CateringModel(); // instantiate the customer model 
             $customer->first_name = $request->input("first_name");
             $customer->middle_name = $request->input("middle_name");
             $customer->last_name = $request->input("last_name");
@@ -82,6 +82,45 @@ class SystemController extends Controller
             $customer->save();
             return response()->json(["status" => 200, "message" => "Customer Information added successfully!"]);
         }
+    }
+
+    //Updating customer function
+    public function updateCustomer(Request $request ,$id){
+        $validator = Validator::make($request-> all(),[
+            "first_name" => "required",
+            "middle_name" => "required",
+            "last_name" => "required",
+            "mobile_number" => "required",
+            "email" => "required",
+            "address_line1" => "required",
+            "address_line2" => "required",
+            "barangay" => "required",
+            "city" => "required",
+            "province" => "required",
+            "region" => "required"
+        ]);  
+        if($validator->fails()){
+            return response()->json(['status'=>422,"validationError"=>$validator->errors()]);
+        }else{
+            $customer = CateringModel::find($id);
+            if ($customer){
+                $customer->first_name = $request->input("first_name");
+                $customer->middle_name = $request->input("middle_name");
+                $customer->last_name = $request->input("last_name");
+                $customer->mobile_number = $request->input("mobile_number");
+                $customer->email = $request->input("email");
+                $customer->address_line1 = $request->input("address_line1");
+                $customer->address_line2 = $request->input("address_line2");
+                $customer->barangay = $request->input("barangay");
+                $customer->city = $request->input("city");
+                $customer->province = $request->input("province");
+                $customer->region = $request->input("region");
+                $customer->update();
+            }
+           else{
+            return response()->json(["status" => 200, "message" => "Customer Information Updated Successfully."]);
+           }        
+        } 
     }
 
     public function deleteCustomer($id)

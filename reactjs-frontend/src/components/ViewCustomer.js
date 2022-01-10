@@ -49,7 +49,7 @@ const ViewCustomer = () => {
                     <td>{item.first_name}, {item.middle_name}, {item.last_name}</td>
                     <td>{item.mobile_number}</td>
                     <td>{item.city} {item.province}</td>
-                    <td><Link to={`editproduct/${item.id}`} className='btn btn-success btn-sm m-1'> <i className="bi bi-pen-fill"></i> EDIT</Link>
+                    <td><Link to={`editcustomer/${item.id}`} className='btn btn-success btn-sm m-1'> <i className="bi bi-pen-fill"></i> EDIT</Link>
                         <button type='button' onClick={(e) => deleteCustomer(e, item.id)} className='btn btn-danger btn-sm'> <i className="bi bi-trash-fill"></i> DELETE</button>
                     </td>
                 </tr>

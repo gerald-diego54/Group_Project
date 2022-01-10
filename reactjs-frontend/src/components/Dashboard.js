@@ -11,6 +11,7 @@ import Sidebar from './Sidebar';
 //Date and time display on Dashboard
 var today = new Date();
 var day = today.getDay();
+var date = today.getDate();
 var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
 let dayname = daylist[day];
 var hours = today.getHours();
@@ -38,7 +39,7 @@ const Dashboard = () => {
                     </div>
                     <div className='col'>
                         <p className='fs-5 fw-bold' style={{ float: "right", marginLeft: 20, marginTop: 27, color: '#7A7A7A' }}>{dayname +', ' + hours + ':'
-                         + minute + ' ' +part +', ' + monthname +' ' + day + ' '+year}</p>
+                         + minute + ' ' +part +', ' + monthname +' ' + date + ', '+year}</p>
                     </div>
                 </div>
                 <div className='row'>
