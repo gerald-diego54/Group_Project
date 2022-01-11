@@ -310,12 +310,10 @@ class SystemController extends Controller
 
     public function upcommingEvent()
     {
-        $event = EventModel::table('event_info_table')
-            ->select('event_date')
+        $event = EventModel::all()
             // ->whereDate('event_date', '>=', date('F-d-Y'))
             // ->orderBy('event_date', 'DESC')
-            // ->first();
-            ->get();
+            ->first();
 
         return response()->json(['status' => 200, "event" => $event]);
     }
