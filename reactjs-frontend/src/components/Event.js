@@ -52,18 +52,38 @@ const Event = () => {
         axios.post("api/event", data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
-                sweetAlert({
-                    icon: "success",
-                    title: response.data.message,
-                    button: "Next"
-                }).then(response => {
-                    window.location.href = "/payment";
-                });
+                swalWithBootstrapButtons.fire({
+                    icon: "question",
+
+                    title: 'Add this customer?',
+                    text: response.data.confirmMessage,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Add this !',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((response) => {
+                    if(response.isConfirmed){
+                        swalWithBootstrapButtons.fire(
+                            'Added!',
+                            'Event has been added to customer.',
+                            'success'
+                        )
+                        window.location.href = "/payment";
+                    }else if(
+                        response.dismiss===Swal.DismissReason.cancel
+                    ){
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            'The customer has not been save. :)',
+                            'error'
+                          )
+                    }
+                })
             }
             else if (response.data.status === 422) {
                 sweetAlert({
                     icon: "error",
-                    title: response.data.validate_err
+                    title: response.data.message
                 });
             }
         });
