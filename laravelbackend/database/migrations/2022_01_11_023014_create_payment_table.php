@@ -16,11 +16,11 @@ class CreatePaymentTable extends Migration
         Schema::create('customer_payment', function (Blueprint $table) {
             $table->id();
             $table->string('payment_type');
-            $table->integer('amount');
-            $table->integer('downpayment');
-            $table->string('collectibles');
-            $table->string('bank_name');
-            $table->string('code');
+            $table->integer('amount')->nullable();
+            $table->integer('downpayment')->nullable();
+            $table->integer('collectibles')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('code')->nullable();
             $table->foreign('id')->references('id')->on('customer_info_table')->onDelete('cascade');
             $table->timestamps();
         });
