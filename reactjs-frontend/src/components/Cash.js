@@ -8,7 +8,7 @@ const Cash = () => {
         e.preventDefault();
         sweetAlert({
             icon: "success",
-            title: "Nextpage"
+            title: "Payment Added"
         });
     }
 

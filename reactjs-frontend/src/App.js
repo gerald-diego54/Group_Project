@@ -13,6 +13,7 @@ import ViewCustomer from './components/ViewCustomer';
 import EditEvent from './components/EditEvent';
 import EditCustomer from './components/EditCustomer';
 import Payment from './components/Payment';
+import EditPayment from './components/EditPayment';
 import Cash from './components/Cash';
 import Cheque from './components/Cheque';
 import ViewCustomerStatus from './components/ViewCustomerStatus'
@@ -35,6 +36,7 @@ function App() {
           <Route exact path="/cashway" element={<Cash />}></Route>
           <Route exact path="/chequeway" element={<Cheque />}></Route>
           <Route exact path="/viewcustomerstatus" element={<ViewCustomerStatus />}></Route>
+          <Route exact path="/viewcustomer/editpayment/:id" element={<EditPayment />}></Route>
         </Routes>
       </Router>
     </div>
