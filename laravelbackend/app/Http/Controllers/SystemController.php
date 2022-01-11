@@ -219,7 +219,7 @@ class SystemController extends Controller
             $customer->event_province = $request->input("event_province");
             $customer->event_region = $request->input("event_region");
             $customer->save();
-            return response()->json(["status" => 200, "message" => "Customer Event Information added successfully!"]);
+            return response()->json(["status" => 200, "message" => "Customer Event Information added successfully!", "confirmMessage"=>"if you add this , you will then proceed to adding of payment method."]);
         }
     }
  

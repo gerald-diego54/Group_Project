@@ -4,6 +4,7 @@ import axios from 'axios';
 import sweetAlert from 'sweetalert';
 import fieldset2 from '../images/fieldset_2.svg';
 import { Time } from './Time';
+import Swal from 'sweetalert2';
 
 
 const Event = () => {
@@ -39,6 +40,15 @@ const Event = () => {
             event_region: values_event.event_region
         }
         console.log(data);
+
+          //integration of sweetalert2
+          const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
         axios.post("api/event", data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {

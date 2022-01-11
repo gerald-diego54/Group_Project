@@ -7,7 +7,6 @@ import axios from 'axios';
 import sweetAlert from 'sweetalert';
 import { Time } from './Time';
 import Swal from 'sweetalert2';
-// import swal from 'sweetalert';
 const AddCustomer = () => {
 
     const [values, setValue] = useState({
@@ -82,9 +81,7 @@ const AddCustomer = () => {
                             'error'
                           )
                     }
-                    
-                }
-                )
+                })
             }
             else if (response.data.status === 422) {
                 sweetAlert({
