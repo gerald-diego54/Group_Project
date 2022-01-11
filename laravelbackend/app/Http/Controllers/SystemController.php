@@ -168,15 +168,17 @@ class SystemController extends Controller
     {
         $customer = CateringModel::find($id);
         $events = EventModel::find($id);
+        $payment = PaymentModel::find($id);
         if ($customer) {
             $customer->delete();
             $events->delete();
+            $payment->delete();
             return response()->json(['status' => 200, "message" => 'Product deleted successfully!']);
         } else {
             return response()->json(['status' => 404, "message" => 'No product ID found!']);
         }
     }
-    public function deleteEvents($id)
+    public function deleteEvents($id) // this block is unused
     {
         $events = EventModel::find($id);
         if ($events) {
@@ -257,6 +259,39 @@ class SystemController extends Controller
             return response()->json(['status' => 404, "message" => 'No customer ID found!']);
         }
     }
+
+     //Updating events function
+     public function updatePayments(Request $request ,$id){
+        $validator = Validator::make($request-> all(),[
+            "payment_type" => "required",
+            // "amount" => "required", //not yet required
+            // "downpayment" => "required", //not yet required
+            // "collectibles" => "required", //not yet required
+            // "bank_name" => "required", //not yet required
+            // "code" => "required", //not yet rutequired
+        ]);  
+        if($validator->fails()){
+            return response()->json(['status'=>422,"validationError"=>$validator->errors()]);
+        }else{
+            $payment  = PaymentModel::find($id);
+            if ($payment){
+                $payment->payment_type = $request->input("payment_type");
+                $payment->amount = $request->input("amount");
+                $payment->downpayment = $request->input("downpayment");
+                $payment->collectibles = $request->input("collectibles");
+                $payment->bank_name = $request->input("bank_name");
+                $payment->code = $request->input("code");
+                $payment->paymentstatus = $request->input("paymentstatus");
+                $payment->update();
+                return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+            }
+           else{
+            return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+
+           }        
+        } 
+    }
+  
 
     public function edit($id)
     {
