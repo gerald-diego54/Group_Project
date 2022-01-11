@@ -1,5 +1,5 @@
 // Dashboard
-// import React, {Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/style.css';
 import graph_one from '../images/chart_1.svg';
 import graph_two from '../images/chart_2.svg';
@@ -7,15 +7,44 @@ import graph_three from '../images/chart_3.svg';
 import image_1 from '../images/img_1.svg';
 import Sidebar from './Sidebar';
 import { Time } from './Time';
+import axios from 'axios';
 
 
 
 const Dashboard = () => {
+    const [noOfCustomer, setNoOfCustomer] = useState("");
+    const [nextEvent, setNextEvent] = useState("");
+    const [loading, setLoading] = useState(true);
+    var numOfCustomers = "No Data";
+    var nextDate = "No Event";
+    useEffect(() => {
+        axios.get('api/countCustomer').then(res => {
+            if (res['status'] === 200) {
+                setNoOfCustomer(res.data.total_customer);
+                // console.log(res.data.total_customer);
+            }
+        });
 
+        axios.get('api/nextEvent').then(res => {
+            if (res['status'] === 200) {
+                console.log(res.data.event);
+                // setNextEvent(res.data.event.event_date);
+                setLoading(false);
+            }
+        });
+    }, []);
+
+    if (loading) {
+        var whileLoading = " Loading Customer Data";
+    } else {
+        numOfCustomers = noOfCustomer;
+        nextDate = nextEvent;
+    }
     return (
         <>
             <Sidebar />
             <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}>
+                <h2>{whileLoading}</h2>
                 <div className='row'>
                     <div className='col'>
                         <p className='fs-3 fw-bold' style={{ float: "left", marginLeft: 20, marginTop: 20 }}>Overview</p> <Time />
@@ -27,10 +56,10 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#F492A0' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-3 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>23.4K</p>
+                                        <p className='fs-3 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{numOfCustomers}</p>
                                     </div>
                                     <div className='col'>
-                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Annual Salary</p>
+                                        <p className='text-white' style={{ float: "left", marginTop: -10 }}>Number of Customers</p>
 
                                     </div>
                                 </div>
@@ -42,10 +71,10 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#9194CE' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-3 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>15.4K</p>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>Not Available</p>
                                     </div>
                                     <div className='col'>
-                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Total Sale</p>
+                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Total Sales</p>
                                     </div>
                                 </div>
                             </div>
@@ -56,10 +85,10 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#FEB161' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>November 12</p>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>Not Available</p>
                                     </div>
                                     <div className='col'>
-                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Upcoming Events</p>
+                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Collectibles</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,10 +99,10 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#00A8BF' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-3 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>30.5K</p>
+                                        <p className='fs-3 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ nextDate }</p>
                                     </div>
                                     <div className='col'>
-                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Collectibles</p>
+                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Upcomming Event</p>
                                     </div>
                                 </div>
                             </div>
