@@ -3,8 +3,8 @@ import Sidebar from './Sidebar';
 // import UserDetails from './UserDetails';
 import fieldset3 from '../images/fieldset_3.svg';
 import '../css/style.css';
-// import axios from 'axios';
-// import sweetAlert from 'sweetalert';
+import axios from 'axios';
+import sweetAlert from 'sweetalert';
 // import Cash from './Cash';
 import { useNavigate } from 'react-router-dom';
 import { Time } from './Time';
@@ -12,11 +12,8 @@ import { Time } from './Time';
 const Payment = () => {
     var history = useNavigate();
     const [paymentType, setPaymentType] = useState([]);
-    // const handleChange = (e) => {
-    // let payment = document.getElementById("payment_type").value;
-    // setPaymentType({ ...paymentType, [e.target.name]: e.target.value })
-    // }
-    // if (paymentType == "Cash") {
+   
+  
     const handleChange = (e) => {
         history(`/${e.target.value}`);
 
@@ -39,7 +36,7 @@ const Payment = () => {
                     <form style={{ position: "relative", bottom: 440, left: 70 }}>
                         <div className='row lh-lg'>
                             <div className='col text-start'>
-                                <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Event Status</label><br />
+                                <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Select Payment type</label><br />
                                 <select style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} value={paymentType.payment_type} onChange={handleChange} name='payment_type' type="text" className="form-control" aria-label="payment type">
                                     <option>-- Select --</option>
                                     <option value="cashway">Cash</option>

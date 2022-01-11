@@ -400,7 +400,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'cd1a6137aed5ac99eeba584ae52948cb42a15140',
+            'reference' => '0d1438c465bf7a40aeb32b53c06c2f080ac58058',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -681,6 +681,15 @@
             'aliases' => array(),
             'reference' => '2406855036db1102126125537adb1406f7242fdd',
             'dev_requirement' => true,
+        ),
+        'psr/cache' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/cache',
+            'aliases' => array(),
+            'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
+            'dev_requirement' => false,
         ),
         'psr/container' => array(
             'pretty_version' => '1.1.2',

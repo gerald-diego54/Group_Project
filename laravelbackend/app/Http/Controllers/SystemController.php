@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\CateringModel;
 use Illuminate\Http\Request;
 use App\Models\EventModel;
+use App\Models\PaymentModel;
 
 class SystemController extends Controller
 {
@@ -80,7 +81,7 @@ class SystemController extends Controller
             $customer->province = $request->input("province");
             $customer->region = $request->input("region");
             $customer->save();
-            return response()->json(["status" => 200, "message" => "Customer Information added successfully!"]);
+            return response()->json(["status" => 200, "message" => "Customer Information added successfully!","confirmMessage"=>"if you add this , you will then proceed to adding of events."]);
         }
     }
 
@@ -167,15 +168,17 @@ class SystemController extends Controller
     {
         $customer = CateringModel::find($id);
         $events = EventModel::find($id);
+        // $payment = PaymentModel::find($id);
         if ($customer) {
             $customer->delete();
             $events->delete();
+            // $payment->delete();  unused data
             return response()->json(['status' => 200, "message" => 'Product deleted successfully!']);
         } else {
             return response()->json(['status' => 404, "message" => 'No product ID found!']);
         }
     }
-    public function deleteEvents($id)
+    public function deleteEvents($id) // this block is unused
     {
         $events = EventModel::find($id);
         if ($events) {
@@ -219,12 +222,81 @@ class SystemController extends Controller
             return response()->json(["status" => 200, "message" => "Customer Event Information added successfully!"]);
         }
     }
+ 
+    //This block will add new payment method for the customer 
+    public function create_payment(Request $request){
+        $validator = Validator::make($request->all(), [
+            "payment_type" => "required",
+            // "amount" => "required", //not yet required
+            // "downpayment" => "required", //not yet required
+            // "collectibles" => "required", //not yet required
+            // "bank_name" => "required", //not yet required
+            // "code" => "required", //not yet required
+        ]);
+        if ($validator->fails()) {
+            return response()->json(["status" => 422, "validate_err" => $validator->errors()]);
+        } else {
+            //if the conditions !=true then will proceed to this block
+            $customer = new PaymentModel();
+            $customer->payment_type = $request->input("payment_type");
+            $customer->amount = $request->input("amount");
+            $customer->downpayment = $request->input("downpayment");
+            $customer->collectibles = $request->input("collectibles");
+            $customer->bank_name = $request->input("bank_name");
+            $customer->code = $request->input("code");
+            $customer->save();
+            return response()->json(["status" => 200, "message" => "Customer Payment added successfully!"]);
+        }
+    }
 
+    //This block will edit the customer payment  based on ID.
+    public function editPayment($id)
+    {
+        $payment = PaymentModel::find($id);
+        if ($payment) {
+            return response()->json(['status' => 200, "payments" => $payment]);
+        } else {
+            return response()->json(['status' => 404, "message" => 'No customer ID found!']);
+        }
+    }
+
+     //Updating events function
+     public function updatePayments(Request $request ,$id){
+        $validator = Validator::make($request-> all(),[
+            "payment_type" => "required",
+            // "amount" => "required", //not yet required
+            // "downpayment" => "required", //not yet required
+            // "collectibles" => "required", //not yet required
+            // "bank_name" => "required", //not yet required
+            // "code" => "required", //not yet rutequired
+        ]);  
+        if($validator->fails()){
+            return response()->json(['status'=>422,"validationError"=>$validator->errors()]);
+        }else{
+            $payment  = PaymentModel::find($id);
+            if ($payment){
+                $payment->payment_type = $request->input("payment_type");
+                $payment->amount = $request->input("amount");
+                $payment->downpayment = $request->input("downpayment");
+                $payment->collectibles = $request->input("collectibles");
+                $payment->bank_name = $request->input("bank_name");
+                $payment->code = $request->input("code");
+                $payment->paymentstatus = $request->input("paymentstatus");
+                $payment->update();
+                return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+            }
+           else{
+            return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+
+           }        
+        } 
+    }
+  
 
     public function edit($id)
     {
         $customer = CateringModel::find($id);
-        $events = EventModel::find($id);
+        $events = EventModel::find($id);  //redundant line? same to line 40-48
         if ($customer) return response()->json(["status" => 200, "customer" => $customer, "event" => $events]);
         else return response()->json(["status" => 404, "message" => "No product ID found!"]);
     }
