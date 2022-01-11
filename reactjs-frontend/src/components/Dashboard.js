@@ -28,7 +28,7 @@ const Dashboard = () => {
         axios.get('api/nextEvent').then(res => {
             if (res['status'] === 200) {
                 console.log(res.data.event.event_date);
-                // setNextEvent(res.data.event.event_date);
+                setNextEvent(res.data.event.event_date);
                 setLoading(false);
             }
         });
