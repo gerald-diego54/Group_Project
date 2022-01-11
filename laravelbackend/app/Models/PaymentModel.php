@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CateringModel extends Model
+class PaymentModel extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,8 @@ class CateringModel extends Model
     protected $fillable = [
         "id",
         "payment_type",
-        "amount",
-        "downpayment",
+        "amount", // int datatype?
+        "downpayment", 
         "collectibles",
         "bank_name",
         "code",
