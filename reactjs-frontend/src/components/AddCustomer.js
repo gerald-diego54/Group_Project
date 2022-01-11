@@ -6,7 +6,8 @@ import '../css/style.css';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
 import { Time } from './Time';
-
+import Swal from 'sweetalert2';
+// import swal from 'sweetalert';
 const AddCustomer = () => {
 
     const [values, setValue] = useState({
@@ -43,16 +44,47 @@ const AddCustomer = () => {
             province: values.province,
             region: values.region
         }
+        //integration of sweetalert2
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+
         axios.post("api/customerinfo", data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
-                sweetAlert({
-                    icon: "success",
-                    title: response.data.message,
-                    button: "Submit"
-                }).then(response => {
-                    window.location.href = "/event";
-                })
+                swalWithBootstrapButtons.fire({
+                    icon: "question",
+
+                    title: 'Add this customer?',
+                    text: response.data.confirmMessage,
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Add this !',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((response) => {
+                    if(response.isConfirmed){
+                        swalWithBootstrapButtons.fire(
+                            'Added!',
+                            'Customer has been added.',
+                            'success'
+                        )
+                        window.location.href = "/event";
+                    }else if(
+                        response.dismiss===Swal.DismissReason.cancel
+                    ){
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            'The customer has not been save. :)',
+                            'error'
+                          )
+                    }
+                    
+                }
+                )
             }
             else if (response.data.status === 422) {
                 sweetAlert({

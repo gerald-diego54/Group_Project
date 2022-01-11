@@ -81,7 +81,7 @@ class SystemController extends Controller
             $customer->province = $request->input("province");
             $customer->region = $request->input("region");
             $customer->save();
-            return response()->json(["status" => 200, "message" => "Customer Information added successfully!"]);
+            return response()->json(["status" => 200, "message" => "Customer Information added successfully!","confirmMessage"=>"if you add this , you will then proceed to adding of events."]);
         }
     }
 
@@ -168,11 +168,11 @@ class SystemController extends Controller
     {
         $customer = CateringModel::find($id);
         $events = EventModel::find($id);
-        $payment = PaymentModel::find($id);
+        // $payment = PaymentModel::find($id);
         if ($customer) {
             $customer->delete();
             $events->delete();
-            $payment->delete();
+            // $payment->delete();  unused data
             return response()->json(['status' => 200, "message" => 'Product deleted successfully!']);
         } else {
             return response()->json(['status' => 404, "message" => 'No product ID found!']);
