@@ -6,6 +6,7 @@ import '../css/style.css';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Time } from './Time';
 
 
 function EditCustomer() {
@@ -77,7 +78,12 @@ function EditCustomer() {
     return (
         <div>
             <Sidebar />
-            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}><br /><br />
+            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}>
+                <div className='row'>
+                    <div className='col'>
+                        <p className='fs-3 fw-bold' style={{ float: "left", marginLeft: 20, marginTop: 20 }}>Overview</p> <Time />
+                    </div>
+                </div>
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
                     {/* FieldSet 1 */}
                     <img alt='' className='my-4' src={fieldset} />

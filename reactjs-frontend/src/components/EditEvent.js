@@ -6,6 +6,7 @@ import '../css/style.css';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
 import { useParams } from 'react-router-dom';
+import { Time } from './Time';
 
 function EditEvent() {
     const [values_event, setValues] = useState([]);
@@ -17,11 +18,11 @@ function EditEvent() {
         setValues({ ...values_event, [e.target.name]: e.target.value });
     }
     console.log(values_event);
-    
+
     useEffect(() => {
         const customer_id = id;
         axios.get(`api/editevent/${customer_id}`).then(response => {
-          console.log("test ",response.data.events);
+            console.log("test ", response.data.events);
             if (response.data.status === 200) {
                 setValues(response.data.events).then(response => {
                     window.location.href = "/viewcustomer";
@@ -29,7 +30,10 @@ function EditEvent() {
                 // setLoading(false);
             }
             else if (response.data.status === 404) {
-                sweetAlert('error', response.data.message);
+                sweetAlert({
+                    icon: "error",
+                    title: response.data.message
+                });
             }
         });
     }, [id]);
@@ -50,16 +54,25 @@ function EditEvent() {
         axios.put(`api/updateevent/${id}`, data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
-                sweetAlert("Success", response.data.message).then(response => {
+                sweetAlert({
+                    icon: "success",
+                    title: response.data.message
+                }).then(response => {
                     window.location.href = "/viewcustomer";
                 })
             }
             else if (response.data.status === 422) {
                 // console.log(response.data.status);
-                sweetAlert("Error Code: 422");
+                sweetAlert({
+                    icon: "info",
+                    title: "Required Fields!"
+                });
             }
             else if (response.data.status === 404) {
-                sweetAlert("All fields are mandatory!", "");
+                sweetAlert({
+                    icon: "error",
+                    title: "No data found!"
+                });
             }
         });
     }
@@ -67,7 +80,12 @@ function EditEvent() {
     return (
         <div>
             <Sidebar />
-            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}><br /><br />
+            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}>
+                <div className='row'>
+                    <div className='col'>
+                        <p className='fs-3 fw-bold' style={{ float: "left", marginLeft: 20, marginTop: 20 }}>Overview</p> <Time />
+                    </div>
+                </div>
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
                     <img alt='' className='my-4' src={fieldset2} />
                     <form onSubmit={updateEvent} style={{ position: "relative", bottom: 440 }}>
