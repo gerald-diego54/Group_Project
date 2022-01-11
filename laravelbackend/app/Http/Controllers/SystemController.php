@@ -228,4 +228,23 @@ class SystemController extends Controller
         if ($customer) return response()->json(["status" => 200, "customer" => $customer, "event" => $events]);
         else return response()->json(["status" => 404, "message" => "No product ID found!"]);
     }
+
+    public function countCustomer()
+    {
+        $Customer = CateringModel::all();
+        $noOfCustomer = $Customer->count();
+        return response()->json(['status' => 200, "total_customer" => $noOfCustomer]);
+    }
+
+    public function upcommingEvent()
+    {
+        $event = EventModel::table('event_info_table')
+            ->select('event_date')
+            // ->whereDate('event_date', '>=', date('F-d-Y'))
+            // ->orderBy('event_date', 'DESC')
+            // ->first();
+            ->get();
+
+        return response()->json(['status' => 200, "event" => $event]);
+    }
 }

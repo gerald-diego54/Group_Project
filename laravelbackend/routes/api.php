@@ -14,6 +14,8 @@ Route::put('/updateevent/{id}',[SystemController::class,'updateEvents']); //Will
 Route::put('/updatecustomer/{id}',[SystemController::class, 'updateCustomer']); // will update customer 
 Route::delete('/deletecustomer/{id}',[SystemController::class, 'deleteCustomer']); // will delete customer 
 Route::get("/editproduct/{id}", [SystemController::class, "edit"]);
+Route::get("/countCustomer", [SystemController::class, "countCustomer"]); // get total customers
+Route::get("/nextEvent", [SystemController::class, "upcommingEvent"]); // get next event
 
 
 
