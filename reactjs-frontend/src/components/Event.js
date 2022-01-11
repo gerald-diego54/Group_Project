@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
 import fieldset2 from '../images/fieldset_2.svg';
+import { Time } from './Time';
 
 
 const Event = () => {
@@ -26,7 +27,7 @@ const Event = () => {
         e.preventDefault();
 
         const data = {
-            
+
             event_name: values_event.event_name,
             event_date: values_event.event_date,
             event_status: values_event.event_status,
@@ -46,7 +47,7 @@ const Event = () => {
                     title: response.data.message,
                     button: "Next"
                 }).then(response => {
-                    window.location.href = "/addrecord";
+                    window.location.href = "/payment";
                 });
             }
             else if (response.data.status === 422) {
@@ -60,12 +61,17 @@ const Event = () => {
     return (
         <div>
             <Sidebar />
-            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}><br /><br />
+            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}>
+                <div className='row'>
+                    <div className='col'>
+                        <p className='fs-3 fw-bold' style={{ float: "left", marginLeft: 20, marginTop: 20 }}>Overview</p> <Time />
+                    </div>
+                </div><br />
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
                     <img alt='' className='my-4' src={fieldset2} />
                     {/* Fieldsets 2 */}
                     <form onSubmit={saveCustomer} style={{ position: "relative", bottom: 440 }}>
-                        
+
                         <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                             <div className='col text-start'>
                                 {/* Event Type */}
@@ -120,7 +126,7 @@ const Event = () => {
                         </div>
                         <div className='row'>
                             <div className='col'>
-                                <button type='submit' style={{ width: 200 }} className='btn btn-outline-primary btn-pos2'>Submit</button>
+                                <button type='submit' style={{ width: 200 }} className='btn btn-outline-primary btn-pos2'>Next</button>
                             </div>
                         </div>
                     </form>

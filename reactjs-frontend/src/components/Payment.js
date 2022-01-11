@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 // import UserDetails from './UserDetails';
-// import fieldset3 from '../images/fieldset_3.svg';
+import fieldset3 from '../images/fieldset_3.svg';
 import '../css/style.css';
 // import axios from 'axios';
 // import sweetAlert from 'sweetalert';
@@ -35,7 +35,7 @@ const Payment = () => {
                 </div><br />
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
                     {/* FieldSet 1 */}
-                    {/* <img alt='' className='my-4' src={fieldset3} /> */}
+                    <img alt='' className='my-4' src={fieldset3} />
                     <form style={{ position: "relative", bottom: 440, left: 70 }}>
                         <div className='row lh-lg'>
                             <div className='col text-start'>

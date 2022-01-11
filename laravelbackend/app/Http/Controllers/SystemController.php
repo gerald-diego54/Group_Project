@@ -21,7 +21,7 @@ class SystemController extends Controller
     public function showEvents()
     {
         $Events = EventModel::all();
-        return response()->json(['statys' => 200, "events" => $Events]);
+        return response()->json(['status' => 200, "events" => $Events]);
     }
 
     //This block will edit the customer based on ID.
@@ -63,7 +63,7 @@ class SystemController extends Controller
             "region" => "required"
         ]);
         if ($validator->fails()) {
-            return response()->json(["status" => 422, "message" => "Error! , Please fill out the missing fields."]);
+            return response()->json(["status" => 422, "message" => "Required Fields!"]);
         }
         // if validations are not met , proceed to this line
         else {

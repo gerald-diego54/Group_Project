@@ -3,7 +3,7 @@ import '../css/style.css';
 import Payment from './Payment';
 import sweetAlert from 'sweetalert';
 
-const Cheque = () => {
+const Cash = () => {
     const savePayment = (e) => {
         e.preventDefault();
         sweetAlert({
@@ -19,20 +19,20 @@ const Cheque = () => {
                 <div className='row'>
                     <div className='col text-start'>
                         {/* Event Type */}
-                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Bank Name</label><br />
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} name='amount' type="text" placeholder="Bankname" className="form-control" aria-label="First name" />
+                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Amount</label><br />
+                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} name='amount' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" />
                     </div>
                     <div className='col text-start'>
                         {/* Event Type */}
-                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Code</label><br />
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} name='cheque_code' type="text" placeholder="Code" className="form-control" aria-label="First name" />
+                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Downpayment</label><br />
+                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} name='cheque_code' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" />
                     </div>
                 </div>
                 <div className='row'>
                     <div className='col text-start'><br /><br />
                         {/* Event Type */}
-                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Amount</label>
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} name='amount' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" />
+                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Collectibles</label>
+                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} name='amount' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" disabled />
                     </div>
                     <div className='col text-start'><br /><br />
                         {/* Event Type */}
@@ -50,4 +50,4 @@ const Cheque = () => {
     )
 }
 
-export default Cheque
+export default Cash
