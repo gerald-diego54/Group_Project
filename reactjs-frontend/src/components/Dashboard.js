@@ -19,15 +19,18 @@ const Dashboard = () => {
     var nextDate = "No Event";
     useEffect(() => {
         axios.get('api/countCustomer').then(res => {
+            console.log(res.data.status)
             if (res['status'] === 200) {
                 setNoOfCustomer(res.data.total_customer);
                 // console.log(res.data.total_customer);
+                setLoading(false);
+
             }
         });
 
         axios.get('api/nextEvent').then(res => {
             if (res['status'] === 200) {
-                console.log(res.data.event.event_date);
+                // console.log(res.data.event.event_date);
                 setNextEvent(res.data.event.event_date);
                 setLoading(false);
             }
@@ -36,12 +39,18 @@ const Dashboard = () => {
 
     if (loading) {
         var whileLoading = " Loading Customer Data";
-    } else {
+    }
+    else if (noOfCustomer === 0)  {
+        numOfCustomers = "No Data";
+        nextDate = "No Event";
+    }
+    
+    else {
         numOfCustomers = noOfCustomer;
         nextDate = nextEvent;
     }
     return (
-        <>
+        <div>
             <Sidebar />
             <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}>
                 <h2>{whileLoading}</h2>
@@ -54,15 +63,15 @@ const Dashboard = () => {
                     <div className='col'>
                         <div className="card shadow bg-body rounded" style={{ marginLeft: 20, border: 0, width: 200, position: "relative", top: 50 }}>
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#F492A0' }}>
-                                <div className='row'>
-                                    <div className='col'>
-                                        <p className='fs-3 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{numOfCustomers}</p>
+                                {/* <div className='row'> */}
+                                    <div className='row'>
+                                        <p className='fs-4 fw-bold text-white' style={{ marginTop: -13, }}>{numOfCustomers}</p>
                                     </div>
-                                    <div className='col'>
+                                    <div className='row'>
                                         <p className='text-white' style={{ float: "left", marginTop: -10 }}>Number of Customers</p>
 
                                     </div>
-                                </div>
+                                {/* </div> */}
                             </div>
                         </div>
                     </div>
@@ -99,7 +108,7 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#00A8BF' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-3 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ nextDate }</p>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ nextDate }</p>
                                     </div>
                                     <div className='col'>
                                         <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Upcomming Event</p>
@@ -132,7 +141,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

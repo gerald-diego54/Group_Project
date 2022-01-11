@@ -12,6 +12,7 @@ const Cheque = () => {
         payment_status: ""
     });
     // retrieve data from input fields
+    
     const handleChange = (e) => {
         setChequeData({...chequeData, [e.target.name]: e.target.value})
     }
@@ -62,7 +63,10 @@ const Cheque = () => {
                     <div className='col text-start'><br /><br />
                         {/* Event Type */}
                         <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Payment Status</label>
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={handleChange} name='payment_status' type="text" placeholder="Status" className="form-control" aria-label="First name" />
+                        <select style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={handleChange} name='payment_status' type="text" placeholder="Status" className="form-control" aria-label="First name" >
+                            <option>Paid</option>
+                            <option>Not Paid</option>
+                        </select>
                     </div>
                 </div>
                 <div className='row'>

@@ -54,8 +54,7 @@ const Event = () => {
             if (response.data.status === 200) {
                 swalWithBootstrapButtons.fire({
                     icon: "question",
-
-                    title: 'Add this customer?',
+                    title: 'Add this customer event?',
                     text: response.data.confirmMessage,
                     showCancelButton: true,
                     confirmButtonText: 'Yes, Add this !',

@@ -57,7 +57,6 @@ const AddCustomer = () => {
             if (response.data.status === 200) {
                 swalWithBootstrapButtons.fire({
                     icon: "question",
-
                     title: 'Add this customer?',
                     text: response.data.confirmMessage,
                     showCancelButton: true,
@@ -79,7 +78,7 @@ const AddCustomer = () => {
                             'Cancelled',
                             'The customer has not been save. :)',
                             'error'
-                          )
+                          );
                     }
                 })
             }

@@ -45,12 +45,12 @@ const Cash = () => {
                     <div className='col text-start'>
                         {/* Event Type */}
                         <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Amount</label><br />
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={(e) => setAmount(e.target.value)} name='amount' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" />
+                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={(e) => setAmount(e.target.value)} name='amount' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" required/>
                     </div>
                     <div className='col text-start'>
                         {/* Event Type */}
                         <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Downpayment</label><br />
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={(e) => setDownpaymnet(e.target.value)} name='downpayment' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" />
+                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={(e) => setDownpaymnet(e.target.value)} name='downpayment' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" required/>
                     </div>
                 </div>
                 <div className='row'>
