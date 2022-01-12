@@ -14,12 +14,14 @@ import axios from 'axios';
 const Dashboard = () => {
     const [noOfCustomer, setNoOfCustomer] = useState("");
     const [nextEvent, setNextEvent] = useState("");
+    const [totalSales, setTotalSales] = useState("");
     const [loading, setLoading] = useState(true);
+    var total = "No Sales";
     var numOfCustomers = "No Data";
     var nextDate = "No Event";
     useEffect(() => {
         axios.get('api/countCustomer').then(res => {
-            console.log(res.data.status)
+            // console.log(res.data.status)
             if (res['status'] === 200) {
                 setNoOfCustomer(res.data.total_customer);
                 // console.log(res.data.total_customer);
@@ -35,6 +37,14 @@ const Dashboard = () => {
                 setLoading(false);
             }
         });
+
+        axios.get('api/totalSales').then(res => {
+            if (res['status'] === 200) {
+                console.log(res.data.total);
+                setTotalSales(res.data.total);
+                setLoading(false);
+            }
+        });
     }, []);
 
     if (loading) {
@@ -43,11 +53,14 @@ const Dashboard = () => {
     else if (noOfCustomer === 0)  {
         numOfCustomers = "No Data";
         nextDate = "No Event";
+        total = "No Sales";
+
     }
     
     else {
         numOfCustomers = noOfCustomer;
         nextDate = nextEvent;
+        total = totalSales;
     }
     return (
         <div>
@@ -80,7 +93,7 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#9194CE' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>Not Available</p>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ total }</p>
                                     </div>
                                     <div className='col'>
                                         <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Total Sales</p>

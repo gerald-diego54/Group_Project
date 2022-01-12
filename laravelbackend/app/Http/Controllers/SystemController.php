@@ -328,4 +328,12 @@ class SystemController extends Controller
 
         return response()->json(['status' => 200, "event" => $event]);
     }
+
+    public function showTotalSales()
+    {
+        $sales = PaymentModel::all()
+            ->sum('amount');
+
+        return response()->json(['status' => 200, "total" => $sales]);
+    }
 }
