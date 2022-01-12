@@ -10,7 +10,7 @@ import { Time } from './Time';
 
 function EditEvent() {
     const [values_event, setValues] = useState([]);
-    // const [loading, setLoading] = useState(true);
+    const [val, setVal] = useState({});
     const { id } = useParams();
 
     console.log(values_event);
@@ -54,12 +54,29 @@ function EditEvent() {
         axios.put(`api/updateevent/${id}`, data).then(response => {
             console.log(response.data.status);
             if (response.data.status === 200) {
+                axios.get(`api/editpayment/${id}`).then(
+                    response => {
+                        // console.log(response.data.status)
+                        if (response.data.status === 200) {
+                            setVal(response.data.payments);
+                            console.log(val.payment_type)
+                            if (val.payment_type === "Cheque") {
+                                window.location.href = `/viewcustomer/editcheque/${id}`; // edit payment route here... 
+                            }
+                            else if (val.payment_type === "Cash") {
+                                window.location.href = `/viewcustomer/editpayment/${id}`; // edit payment route here... 
+                            }
+                        }
+                        else if (response.data.status === 404) {
+                            sweetAlert('error', response.data.message).then(response => {
+                                window.location.href = "/editcustomer";
+                            });
+                        }
+                    });
                 sweetAlert({
                     icon: "success",
                     title: response.data.message
-                }).then(response => {
-                    window.location.href = "/viewcustomer"; // edit payment route here... 
-                })
+                });
             }
             else if (response.data.status === 422) {
                 // console.log(response.data.status);
@@ -76,6 +93,9 @@ function EditEvent() {
             }
         });
     }
+
+
+
 
     return (
         <div>

@@ -8,8 +8,8 @@ use Ramsey\Uuid\Provider\Node\SystemNodeProvider;
 Route::post("/customerinfo", [SystemController::class, "create"]); // will post the new data 
 Route::post("/event", [SystemController::class, "create_event"]); // will post new event for customer 
 Route::post("/payment",[SystemController::class,"create_payment"]); // will post new payment for customer
-Route::get("/editpayment{id}",[SystemController::class,"editPayment"]); // will show payment for customer   
-Route::put("/updatepayment{id}",[SystemController::class,"updatePayments"]); // will update customer payment
+Route::get("/editpayment/{id}",[SystemController::class,"editPayment"]); // will show payment for customer   
+Route::put("/updatepayment/{id}",[SystemController::class,"updatePayments"]); // will update customer payment
 Route::get('/customer',[SystemController::class,"showCustomer"]); // will show customer data.
 Route::get('/editcustomer/{id}',[SystemController::class, 'editCustomer']); //will edit customer 
 Route::get('/editevent/{id}',[SystemController::class,'editEvents']); // wwill edit events

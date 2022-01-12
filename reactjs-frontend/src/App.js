@@ -17,6 +17,7 @@ import EditPayment from './components/EditPayment';
 import Cash from './components/Cash';
 import Cheque from './components/Cheque';
 import ViewCustomerStatus from './components/ViewCustomerStatus'
+import EditCheque from './components/EditCheque';
 axios.defaults.baseURL = "http://localhost:8000/";
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
           <Route exact path="/chequeway" element={<Cheque />}></Route>
           <Route exact path="/viewcustomerstatus" element={<ViewCustomerStatus />}></Route>
           <Route exact path="/viewcustomer/editpayment/:id" element={<EditPayment />}></Route>
+          <Route exact path="/viewcustomer/editcheque/:id" element={<EditCheque />}></Route>
+
+          {/* Na pull ko na tas nagpush ulit me */}
         </Routes>
       </Router>
     </div>

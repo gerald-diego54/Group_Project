@@ -23,7 +23,6 @@ const EditCheque = () => {
 
     // Retrieve data from axios
     useEffect(() => {
-        const id = id;
         axios.get(`api/editpayment/${id}`).then(
             response => {
                 console.log(response.data.payments)
