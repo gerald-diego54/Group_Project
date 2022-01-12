@@ -19,8 +19,8 @@ Route::delete('/deletecustomer/{id}',[SystemController::class, 'deleteCustomer']
 Route::get("/editproduct/{id}", [SystemController::class, "edit"]);
 Route::get("/dashboard",  [SystemController::class, "dashboardDisplay"]); // dashboard
 Route::get("/customerStatus", [SystemController::class, "showCustomerStatus"]); // customer status
-Route::put("/markasdone", [SystemController::class,"masrkasDone"]); // will mark the customer event as Done
-Route::put("/markaspaid", [SystemController::class,"markasPaid"]); // will mark the customer payment as paid.
+Route::put("/markasdone/{id}", [SystemController::class,"markasDone"]); // will mark the customer event as Done
+Route::put("/markaspaid/{id}", [SystemController::class,"markasPaid"]); // will mark the customer payment as paid.
 
 
 

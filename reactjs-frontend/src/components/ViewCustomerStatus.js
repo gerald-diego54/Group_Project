@@ -1,15 +1,88 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import swal from 'sweetalert';
+
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import Swal from 'sweetalert2';
 
 const ViewCustomerStatus = () => {
     const [allCustomers, setAllCustomers] = useState();
     const [allEvents, setAllEvents] = useState();
     const [allPayments, setAllPayments] = useState();
-    const [rowCount, setRowCount] = useState();
+     const [rowCount, setRowCount] = useState();
     const [loading, setLoading] = useState(true);
+
+    const markAsDone = (e , id) =>{
+        e.preventDefault();
+        Swal.fire({
+            title: 'Mark as Done?',
+            text: "this event will be mark as done!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Mark it as done!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(`api/markasdone/${id}`).then(
+                    res => {
+                        if (res.data.status === 200) {
+                            Swal.fire(
+                                'Event Done',
+                                'The event was marked as done',
+                                'success'
+                              )
+                            //conditions here...
+                            window.location.reload();
+                        } else if (res.data.status === 404) {
+                            Swal('Error', res.data.message);
+                     
+                        }
+                    }
+                );
+            
+            }else if(  result.dismiss === Swal.DismissReason.cancel){
+
+            }
+          })
+    }
+    const markAsPaid = (e , id) =>{
+        e.preventDefault();
+        Swal.fire({
+            title: 'Mark as Paid?',
+            text: "this Customer will be mark as paid!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, mark it as Paid!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.put(`api/markaspaid/${id}`).then(
+                    res => {
+                        if (res.data.status === 200) {
+                            Swal.fire(
+                                'Customer Paid',
+                                'The customer was marked as done',
+                                'success'
+                              )
+                            //conditions here...
+                            window.location.reload();
+                        } else if (res.data.status === 404) {
+                            Swal('Error', res.data.message);
+                     
+                        }
+                    }
+                );
+            
+            }else if(  result.dismiss === Swal.DismissReason.cancel){
+
+            }
+          })
+    }
+
+
+
     useEffect(() => {
         axios.get('api/customerStatus').then(res => {
             if (res['status'] === 200) {
@@ -26,30 +99,11 @@ const ViewCustomerStatus = () => {
 
     }, []);
 
-    const deleteCustomer = (e, id) => {
-        e.preventDefault();
-        console.log(id);
-        const delClick = e.currentTarget;
-        delClick.innerText = 'Deleting..';
-        axios.delete(`api/deletecustomer/${id}`, `api/deleteEvents/${id}`).then(
-            res => {
-                if (res.data.status === 200) {
-                    swal('Data Deleted', res.data.message);
-                    delClick.closest('tr').remove();
-                } else if (res.data.status === 404) {
-                    swal('Error', res.data.message);
-                    delClick.innerText = 'Delete';
-
-                }
-
-            }
-
-        );
-
-    }
+   
     if (loading) {
         var whileLoading = " Loading Customer Data";
     } else {
+    
         var customersStatus = [];
         function CustomerStatus(id, first_name, middle_name, last_name, event_name, event_date, event_status, amount, payment_status){
             this.id = id;
@@ -65,7 +119,8 @@ const ViewCustomerStatus = () => {
             this.amount = amount;
             this.payment_status = payment_status;
         } 
-        for(let i = 0; i < allCustomers.length; i++){
+ 
+         for(let i = 0; i < allCustomers.length; i++){
             var customer = new CustomerStatus(
                 allCustomers[i].id,
                 allCustomers[i].first_name,
@@ -76,10 +131,32 @@ const ViewCustomerStatus = () => {
                 allEvents[i].event_status,
                 allPayments[i].amount,
                 allPayments[i].payment_status
+                
+              
             )
-            console.log(customer);
+            console.log( 'test data ', customer);
             customersStatus.push(customer);
+         var customer_HTMLTABLE = "";
+         customer_HTMLTABLE = customersStatus.map((item,index)=>{
+             return(
+                <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>{item.first_name} {item.middle_name} {item.last_name}</td>
+                    <td>{item.event_name}</td>
+                    <td>{item.event_date}</td>
+                    <td> {item.amount}</td>
+                    <td>{item.payment_status}</td>
+                    <td>{item.event_status}</td>
+                    <td><button  onClick={(e) =>markAsDone(e, item.id)} className='btn btn-success btn-sm-1'> <i class="bi bi-check-circle"></i> DONE</button>
+                        <button  onClick={(e) =>markAsPaid(e, item.id)} className='btn btn-warning btn-sm-1 '> <i class="bi bi-cash-coin"></i> PAID</button>
+                        
+                    </td>
+                </tr>
+             )
+
+         })
         }
+        
     }
     return (
         <div>
@@ -109,7 +186,7 @@ const ViewCustomerStatus = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {/* {customer_HTMLTABLE} */}
+                                            {customer_HTMLTABLE}
                                         </tbody>
                                     </table>
                                 </div>

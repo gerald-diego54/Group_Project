@@ -176,11 +176,11 @@ class SystemController extends Controller
     {
         $customer = CateringModel::find($id);
         $events = EventModel::find($id);
-        // $payment = PaymentModel::find($id);
+        $payment = PaymentModel::find($id);
         if ($customer) {
             $customer->delete();
             $events->delete();
-            // $payment->delete();  unused data
+            $payment->delete();  
             return response()->json(['status' => 200, "message" => 'Product deleted successfully!']);
         } else {
             return response()->json(['status' => 404, "message" => 'No product ID found!']);
@@ -286,7 +286,7 @@ class SystemController extends Controller
                 $payment->collectibles = $request->input("collectibles");
                 $payment->bank_name = $request->input("bank_name");
                 $payment->code = $request->input("cheque_code");
-                $payment->paymentstatus = $request->input("payment_status");
+                $payment->payment_status = $request->input("payment_status");
                 $payment->update();
                 return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
             }
@@ -345,31 +345,31 @@ class SystemController extends Controller
             "event" => $event]);
     }
 
-    // public function markasDone(Request $request ,$id){
-    //     $event  = EventModel::find($id);
-    //     if ($event){
-    //         $event->event_status = $request->input("event_status");
-    //         $event->update();
-    //         return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
-    //     }
-    //    else{
-    //     return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+    public function markasDone(Request $request ,$id){
+        $event  = EventModel::find($id);
+        if ($event){
+            $event->event_status ="Done";
+            $event->update();
+            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+        }
+       else{
+        return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
 
-    //    }      
-    // }
+       }      
+    }
 
-    // public function markasPaid (Request $request, $id){
-    //     $payment  = PaymentModel::find($id);
-    //     if ($payment){
-    //         $payment->paymentstatus = $request->input("payment_status");
-    //         $payment->update();
-    //         return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
-    //     }
-    //    else{
-    //     return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+    public function markasPaid (Request $request, $id){
+        $payment  = PaymentModel::find($id);
+        if ($payment){
+            $payment->payment_status = "Paid";
+            $payment->update();
+            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+        }
+       else{
+        return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
 
-    //    }      
-    // }
+       }      
+    }
 
     public function showCustomerStatus()
     {
@@ -398,5 +398,13 @@ class SystemController extends Controller
         "events" => $events,
         "payments" => $payments,
         "row_count" => $row]);
+
+        return response()->json([
+            'status'=>200,
+            'customers'=> [
+                $customers,
+                $events,
+                $row]
+        ]);
     }
 }

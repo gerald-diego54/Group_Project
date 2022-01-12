@@ -10,7 +10,7 @@ import { Time } from './Time';
 
 
 function EditCustomer() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [values, setValues] = useState([]);
     const [loading, setLoading] = useState(true);
     const { id } = useParams();

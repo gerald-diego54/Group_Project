@@ -11,7 +11,7 @@ const Cash = () => {
      let status;
     let collectibles = amount - downpayment;
     // console.log(status);
-    if (amount === downpayment && amount != 0 && downpayment != 0){ 
+    if (amount === downpayment && amount !== 0 && downpayment !== 0){ 
         status = "Paid";
     }
     else if (collectibles === 0) {

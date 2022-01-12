@@ -35,7 +35,7 @@ const ViewCustomer = () => {
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`api/deletecustomer/${id}`, `api/deleteEvents/${id}`).then(
+                axios.delete(`api/deletecustomer/${id}`, `api/deleteEvents/${id} ,ap`).then(
                     res => {
                         if (res.data.status === 200) {
                             Swal.fire(
