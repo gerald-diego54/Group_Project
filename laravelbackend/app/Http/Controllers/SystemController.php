@@ -53,6 +53,8 @@ class SystemController extends Controller
         }
     }
 
+    
+
     public function create(Request $request)
     {
         //This block will create a new record
@@ -289,8 +291,8 @@ class SystemController extends Controller
                 $payment->downpayment = $request->input("downpayment");
                 $payment->collectibles = $request->input("collectibles");
                 $payment->bank_name = $request->input("bank_name");
-                $payment->code = $request->input("code");
-                $payment->paymentstatus = $request->input("paymentstatus");
+                $payment->code = $request->input("cheque_code");
+                $payment->paymentstatus = $request->input("payment_status");
                 $payment->update();
                 return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
             }

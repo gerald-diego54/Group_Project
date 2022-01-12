@@ -9,7 +9,7 @@ Route::post("/customerinfo", [SystemController::class, "create"]); // will post 
 Route::post("/event", [SystemController::class, "create_event"]); // will post new event for customer 
 Route::post("/payment",[SystemController::class,"create_payment"]); // will post new payment for customer
 Route::get("/editpayment{id}",[SystemController::class,"editPayment"]); // will show payment for customer   
-Route::put("/updatepayment",[SystemController::class,"updatePayment"]); // will update customer payment
+Route::put("/updatepayment",[SystemController::class,"updatePayments"]); // will update customer payment
 Route::get('/customer',[SystemController::class,"showCustomer"]); // will show customer data.
 Route::get('/editcustomer/{id}',[SystemController::class, 'editCustomer']); //will edit customer 
 Route::get('/editevent/{id}',[SystemController::class,'editEvents']); // wwill edit events
