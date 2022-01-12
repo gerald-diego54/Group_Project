@@ -326,4 +326,33 @@ class SystemController extends Controller
         "collectibles" => $collectibles,
         "total" => $sales]);
     }
+
+    public function showCustomerStatus()
+    {
+        $customers = CateringModel::select(
+            'id', 
+            'first_name',
+            'middle_name',
+            'last_name')
+            ->get();
+
+        $events = EventModel::select(
+            'event_name',
+            'event_date',
+            'event_status')
+            ->get();
+
+        $payments = PaymentModel::select(
+            'amount',
+            'payment_status')
+            ->get();
+
+        $row = count($customers);
+
+        return response()->json(['status' => 200,
+        "customers" => $customers,
+        "events" => $events,
+        "payments" => $payments,
+        "row_count" => $row]);
+    }
 }

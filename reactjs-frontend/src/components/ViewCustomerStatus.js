@@ -5,18 +5,27 @@ import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 const ViewCustomerStatus = () => {
-    const [customer, setCustomer] = useState([]);
+    const [allCustomers, setAllCustomers] = useState();
+    const [allEvents, setAllEvents] = useState();
+    const [allPayments, setAllPayments] = useState();
+    const [rowCount, setRowCount] = useState();
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get('api/customer').then(res => {
+        axios.get('api/customerStatus').then(res => {
             if (res['status'] === 200) {
-                setCustomer(res.data.customer);
+                setAllCustomers(res.data.customers);
+                // console.log(res.data.customers.length);
+                setAllEvents(res.data.events);
+                // console.log(res.data.events);
+                setAllPayments(res.data.payments);
+                // console.log(res.data.payments);
+                setRowCount(res.data.row_count);
                 setLoading(false);
             }
-
         })
 
     }, []);
+
     const deleteCustomer = (e, id) => {
         e.preventDefault();
         console.log(id);
@@ -41,20 +50,36 @@ const ViewCustomerStatus = () => {
     if (loading) {
         var whileLoading = " Loading Customer Data";
     } else {
-        var customer_HTMLTABLE = "";
-        customer_HTMLTABLE = customer.map((item, index) => {
-            return (
-                <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item.first_name}, {item.middle_name}, {item.last_name}</td>
-                    <td>{item.mobile_number}</td>
-                    <td>{item.city} {item.province}</td>
-                    <td><Link to={`editcustomer/${item.id}`} className='btn btn-success btn-sm m-1'> <i className="bi bi-pen-fill"></i> EDIT</Link>
-                        <button type='button' onClick={(e) => deleteCustomer(e, item.id)} className='btn btn-danger btn-sm'> <i className="bi bi-trash-fill"></i> DELETE</button>
-                    </td>
-                </tr>
+        var customersStatus = [];
+        function CustomerStatus(id, first_name, middle_name, last_name, event_name, event_date, event_status, amount, payment_status){
+            this.id = id;
+            this.first_name = first_name;
+            this.middle_name = middle_name;
+            this.last_name = last_name;
+            this.name = function () {
+                return this.first_name + " " + this.middle_name + " " + this.last_name;
+            }
+            this.event_name = event_name;
+            this.event_date = event_date;
+            this.event_status = event_status;
+            this.amount = amount;
+            this.payment_status = payment_status;
+        } 
+        for(let i = 0; i < allCustomers.length; i++){
+            var customer = new CustomerStatus(
+                allCustomers[i].id,
+                allCustomers[i].first_name,
+                allCustomers[i].middle_name,
+                allCustomers[i].last_name,
+                allEvents[i].event_name,
+                allEvents[i].event_date,
+                allEvents[i].event_status,
+                allPayments[i].amount,
+                allPayments[i].payment_status
             )
-        })
+            console.log(customer);
+            customersStatus.push(customer);
+        }
     }
     return (
         <div>
@@ -84,7 +109,7 @@ const ViewCustomerStatus = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {customer_HTMLTABLE}
+                                            {/* {customer_HTMLTABLE} */}
                                         </tbody>
                                     </table>
                                 </div>

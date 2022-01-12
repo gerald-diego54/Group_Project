@@ -18,6 +18,7 @@ Route::put('/updatecustomer/{id}',[SystemController::class, 'updateCustomer']); 
 Route::delete('/deletecustomer/{id}',[SystemController::class, 'deleteCustomer']); // will delete customer 
 Route::get("/editproduct/{id}", [SystemController::class, "edit"]);
 Route::get("/dashboard",  [SystemController::class, "dashboardDisplay"]); // dashboard
+Route::get("/customerStatus", [SystemController::class, "showCustomerStatus"]); // customer status
 
 
 
