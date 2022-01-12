@@ -58,7 +58,7 @@ function EditEvent() {
                     icon: "success",
                     title: response.data.message
                 }).then(response => {
-                    window.location.href = "/viewcustomer";
+                    window.location.href = "/viewcustomer"; // edit payment route here... 
                 })
             }
             else if (response.data.status === 422) {
