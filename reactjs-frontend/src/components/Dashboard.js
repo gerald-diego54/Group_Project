@@ -62,18 +62,17 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className='row'>
-                    <div className='col'>
+                <div className='col'>
                         <div className="card shadow bg-body rounded" style={{ marginLeft: 20, border: 0, width: 200, position: "relative", top: 50 }}>
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#F492A0' }}>
-                                {/* <div className='row'> */}
-                                    <div className='row'>
-                                        <p className='fs-4 fw-bold text-white' style={{ marginTop: -13, }}>{numOfCustomers}</p>
+                                <div className='row'>
+                                    <div className='col'>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ numOfCustomers }</p>
                                     </div>
-                                    <div className='row'>
-                                        <p className='text-white' style={{ float: "left", marginTop: -10 }}>Number of Customers</p>
-
+                                    <div className='col'>
+                                        <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Customer's Count</p>
                                     </div>
-                                {/* </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,7 +81,7 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#9194CE' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ total }</p>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ "₱ " + total }</p>
                                     </div>
                                     <div className='col'>
                                         <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Total Sales</p>
@@ -96,7 +95,7 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#FEB161' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ collect }</p>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ "₱ " + collect }</p>
                                     </div>
                                     <div className='col'>
                                         <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Collectibles</p>
