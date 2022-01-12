@@ -25,6 +25,12 @@ class SystemController extends Controller
         return response()->json(['status' => 200, "events" => $Events]);
     }
 
+    //This function will return the payment of customer 
+    public function showPayment(){
+        $payment = PaymentModel::all();
+        return response()->json(['status' =>200, "payment" =>$payment]);
+    }
+
     //This block will edit the customer based on ID.
     public function editCustomer($id)
     {
