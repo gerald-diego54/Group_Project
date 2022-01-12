@@ -306,13 +306,6 @@ class SystemController extends Controller
         else return response()->json(["status" => 404, "message" => "No product ID found!"]);
     }
 
-    public function countCustomer()
-    {
-        $Customer = CateringModel::all();
-        $noOfCustomer = $Customer->count();
-        return response()->json(['status' => 200, "total_customer" => $noOfCustomer]);
-    }
-
     public function upcommingEvent()
     {
         $event = EventModel::select('event_name', 'event_date', 'event_status')
@@ -329,6 +322,27 @@ class SystemController extends Controller
             ->sum('amount');
 
         return response()->json(['status' => 200, "total" => $sales]);
+    }
+
+    public function dashboardDisplay()
+    {
+        $noOfCustomer = CateringModel::all()
+            ->count();
+
+        $event = EventModel::select('event_name', 'event_date', 'event_status')
+            ->where('event_status', 'Pending')
+            ->orderBy('event_date', 'ASC')
+            ->first();
+
+        $payment = PaymentModel::all();
+        $sales =  $payment->sum('amount');
+        $collect =  $payment->sum('collectibles');
+
+        return response()->json(['status' => 200, 
+            "total_customer" => $noOfCustomer,
+            "total" => $sales,
+            "collectibles" => $collect,
+            "event" => $event]);
     }
 
     // public function markasDone(Request $request ,$id){
