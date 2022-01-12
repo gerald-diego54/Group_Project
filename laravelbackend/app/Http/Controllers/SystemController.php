@@ -306,25 +306,55 @@ class SystemController extends Controller
         else return response()->json(["status" => 404, "message" => "No product ID found!"]);
     }
 
-    public function dashboardDisplay()
+    public function countCustomer()
     {
-        $noOfCustomer  = CateringModel::all()
-            ->count();
+        $Customer = CateringModel::all();
+        $noOfCustomer = $Customer->count();
+        return response()->json(['status' => 200, "total_customer" => $noOfCustomer]);
+    }
 
+    public function upcommingEvent()
+    {
         $event = EventModel::select('event_name', 'event_date', 'event_status')
             ->where('event_status', 'Pending')
             ->orderBy('event_date', 'ASC')
             ->first();
 
-        $payment = PaymentModel::all();
-        $sales = $payment->sum('amount');
-        $collectibles = $payment->sum('collectibles');
+        return response()->json(['status' => 200, "event" => $event]);
+    }
 
-        return response()->json(['status' => 200, 
-        "total_customer" => $noOfCustomer,
-        "event" => $event,
-        "collectibles" => $collectibles,
-        "total" => $sales]);
+    public function showTotalSales()
+    {
+        $sales = PaymentModel::all()
+            ->sum('amount');
+
+        return response()->json(['status' => 200, "total" => $sales]);
+    }
+
+    public function markasDone(Request $request ,$id){
+        $event  = EventModel::find($id);
+        if ($event){
+            $event->event_status = $request->input("event_status");
+            $event->update();
+            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+        }
+       else{
+        return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+
+       }      
+    }
+
+    public function markasPaid (Request $request, $id){
+        $payment  = PaymentModel::find($id);
+        if ($payment){
+            $payment->paymentstatus = $request->input("payment_status");
+            $payment->update();
+            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+        }
+       else{
+        return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+
+       }      
     }
 
     public function showCustomerStatus()
