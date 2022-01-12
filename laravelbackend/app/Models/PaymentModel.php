@@ -10,7 +10,7 @@ class PaymentModel extends Model
     use HasFactory;
 
     // Protected Data
-    protected $table = "customer_payment_table";
+    protected $table = "customer_payment";
 
     // Protected Fillable
     protected $fillable = [
