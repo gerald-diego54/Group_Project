@@ -18,8 +18,8 @@ Route::put('/updatecustomer/{id}',[SystemController::class, 'updateCustomer']); 
 Route::delete('/deletecustomer/{id}',[SystemController::class, 'deleteCustomer']); // will delete customer 
 Route::get("/editproduct/{id}", [SystemController::class, "edit"]);
 Route::get("/dashboard",  [SystemController::class, "dashboardDisplay"]); // dashboard
-Route::put("/markasdone", [SystemController::class,"masrkasDone"]); // will mark the customer event as Done
-Route::put("/markaspaid", [SystemController::class,"markasPaid"]); // will mark the customer payment as paid.
+// Route::put("/markasdone", [SystemController::class,"masrkasDone"]); // will mark the customer event as Done
+// Route::put("/markaspaid", [SystemController::class,"markasPaid"]); // will mark the customer payment as paid.
 
 
 

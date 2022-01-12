@@ -331,30 +331,30 @@ class SystemController extends Controller
         return response()->json(['status' => 200, "total" => $sales]);
     }
 
-    public function markasDone(Request $request ,$id){
-        $event  = EventModel::find($id);
-        if ($event){
-            $event->event_status = $request->input("event_status");
-            $event->update();
-            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
-        }
-       else{
-        return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+    // public function markasDone(Request $request ,$id){
+    //     $event  = EventModel::find($id);
+    //     if ($event){
+    //         $event->event_status = $request->input("event_status");
+    //         $event->update();
+    //         return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+    //     }
+    //    else{
+    //     return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
 
-       }      
-    }
+    //    }      
+    // }
 
-    public function markasPaid (Request $request, $id){
-        $payment  = PaymentModel::find($id);
-        if ($payment){
-            $payment->paymentstatus = $request->input("payment_status");
-            $payment->update();
-            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
-        }
-       else{
-        return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
+    // public function markasPaid (Request $request, $id){
+    //     $payment  = PaymentModel::find($id);
+    //     if ($payment){
+    //         $payment->paymentstatus = $request->input("payment_status");
+    //         $payment->update();
+    //         return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+    //     }
+    //    else{
+    //     return response()->json(["status" => 422, "message" => "Customer Payment update Error!"]);
 
-       }      
-    }
+    //    }      
+    // }
  
 }
