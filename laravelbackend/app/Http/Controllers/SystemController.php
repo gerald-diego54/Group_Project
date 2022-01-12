@@ -235,13 +235,7 @@ class SystemController extends Controller
     public function create_payment(Request $request){
         $validator = Validator::make($request->all(), [
             "payment_type" => "required",
-            // "amount" => "required", //not yet required
-            // // "downpayment" => "required", //not yet required
-            // // "collectibles" => "required", //not yet required
-            // "bank_name" => "required", //not yet required
-            // "code" => "required", //not yet required
-            
-
+           
         ]);
         if ($validator->fails()) {
             return response()->json(["status" => 422, "validate_err" => $validator->errors()]);

@@ -36,7 +36,7 @@ const Cheque = () => {
         Swal.fire({
             title: 'Save Payment?',
             text: "This will be added to customer payment",
-            icon: 'warning',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

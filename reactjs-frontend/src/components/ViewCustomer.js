@@ -51,6 +51,8 @@ const ViewCustomer = () => {
                     }
                 );
             
+            }else if(  result.dismiss === Swal.DismissReason.cancel){
+                delClick.innerText = 'Delete';
             }
           })
       

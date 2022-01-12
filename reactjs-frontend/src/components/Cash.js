@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import '../css/style.css';
 import Payment from './Payment';
-import sweetAlert from 'sweetalert';
+import Swal from "sweetalert2";
+// import sweetAlert from 'sweetalert';
+import axios from 'axios';
 
 const Cash = () => {
     const [amount, setAmount] = useState(0);
@@ -22,20 +24,54 @@ const Cash = () => {
 
     const savePayment = (e) => {
         e.preventDefault();
-        sweetAlert({
-            icon: "success",
-            title: "Payment Added"
-        });
+         // use this for axios
+        const data = {
+            payment_type: "Cash",
+            amount: amount,
+            downpayment: downpayment,
+            collectibles: collectibles,
+            payment_status: status
+            
+        }
+        console.log(data);
+        Swal.fire({
+            title: 'Save Payment?',
+            text: "This will be added to customer payment",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post("api/payment" ,data).then(response =>{
+                    console.log(response.data.status);
+                    if(response.data.status ===200){
+                        Swal.fire(
+                            'Saved!',
+                            'Payment Method saved.',
+                            'success'
+                          ).then((result) =>{
+                              //this line will save the data.....
+                              window.location.href = "/viewcustomer";
+                          })
+                    }
+                    else if(response.data.status ===422){
+                        Swal({
+                            icon: "info",
+                            title: response.data.message
+        
+                        });
+                    }
+                })
+            }
+          })
     }
 
-    // use this for axios
-    // const data = {
-    //     payment_status: "Cash",
-    //     amount: amount,
-    //     downpayment: downpayment,
-    //     status: status,
-    //     collectibles: collectibles
-    // }
+   
+
+
+
 
     return (
         <div>
