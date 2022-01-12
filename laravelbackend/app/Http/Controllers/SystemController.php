@@ -223,15 +223,17 @@ class SystemController extends Controller
         }
     }
  
-    //This block will add new payment method for the customer 
+    //This block will add new payment method for the customer for cheque
     public function create_payment(Request $request){
         $validator = Validator::make($request->all(), [
             "payment_type" => "required",
             // "amount" => "required", //not yet required
-            // "downpayment" => "required", //not yet required
-            // "collectibles" => "required", //not yet required
+            // // "downpayment" => "required", //not yet required
+            // // "collectibles" => "required", //not yet required
             // "bank_name" => "required", //not yet required
             // "code" => "required", //not yet required
+            
+
         ]);
         if ($validator->fails()) {
             return response()->json(["status" => 422, "validate_err" => $validator->errors()]);
@@ -243,7 +245,8 @@ class SystemController extends Controller
             $customer->downpayment = $request->input("downpayment");
             $customer->collectibles = $request->input("collectibles");
             $customer->bank_name = $request->input("bank_name");
-            $customer->code = $request->input("code");
+            $customer->cheque_code = $request->input("cheque_code");
+            $customer->payment_status = $request->input("payment_status");
             $customer->save();
             return response()->json(["status" => 200, "message" => "Customer Payment added successfully!"]);
         }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+import sweetAlert from 'sweetalert';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
-import { Time } from './Time';
+
 
 const ViewCustomer = () => {
     const [customer, setCustomer] = useState([]);
@@ -14,27 +15,45 @@ const ViewCustomer = () => {
                 setCustomer(res.data.customer);
                 setLoading(false);
             }
-        });
+
+        })
+
     }, []);
     const deleteCustomer = (e, id) => {
         e.preventDefault();
         console.log(id);
         const delClick = e.currentTarget;
         delClick.innerText = 'Deleting..';
-        axios.delete(`api/deletecustomer/${id}`, `api/deleteEvents/${id}`).then(
-            res => {
-                if (res.data.status === 200) {
-                    swal('Data Deleted', res.data.message);
-                    delClick.closest('tr').remove();
-                } else if (res.data.status === 404) {
-                    swal('Error', res.data.message);
-                    delClick.innerText = 'Delete';
 
-                }
-
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`api/deletecustomer/${id}`, `api/deleteEvents/${id}`).then(
+                    res => {
+                        if (res.data.status === 200) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                              )
+                            delClick.closest('tr').remove();
+                        } else if (res.data.status === 404) {
+                            sweetAlert('Error', res.data.message);
+                            delClick.innerText = 'Delete';
+                        }
+                    }
+                );
+            
             }
-
-        );
+          })
+      
 
     }
     if (loading) {
@@ -48,8 +67,8 @@ const ViewCustomer = () => {
                     <td>{item.first_name}, {item.middle_name}, {item.last_name}</td>
                     <td>{item.mobile_number}</td>
                     <td>{item.city} {item.province}</td>
-                    <td><Link to={`editcustomer/${item.id}`} className='btn btn-primary btn-sm m-1'> <i className="bi bi-pen-fill"></i> EDIT</Link>
-                        <button type='button' onClick={(e) => deleteCustomer(e, item.id)} className='btn btn-warning         btn-sm'> <i className="bi bi-trash-fill"></i> DELETE</button>
+                    <td><Link to={`editcustomer/${item.id}`} className='btn btn-success btn-sm m-1'> <i className="bi bi-pen-fill"></i> EDIT</Link>
+                        <button type='button' onClick={(e) => deleteCustomer(e, item.id)} className='btn btn-danger btn-sm'> <i className="bi bi-trash-fill"></i> DELETE</button>
                     </td>
                 </tr>
             )
@@ -58,31 +77,32 @@ const ViewCustomer = () => {
     return (
         <div>
             <Sidebar />
-            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}>
-                <div className='row'>
-                    <div className='col'>
-                        <p className='fs-3 fw-bold' style={{ float: "left", marginLeft: 20, marginTop: 20 }}>Overview</p> <Time />
-                    </div>
-                </div><br />
+            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}><br /><br />
                 <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
                     <div className='container'>
                         <h2>{whileLoading}</h2>
-                        <div className="card-body" style={{ paddingLeft: 80 }}>
-                            <div className='table' style={{ width: 800, height: 400, overflowY: 'scroll' }}>
-                                <table className='table table-striped table-dark'>
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Mobile Number</th>
-                                            <th>Address</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {customer_HTMLTABLE}
-                                    </tbody>
-                                </table>
+                        <div className="card">
+                            <div className="card-header">
+                                <h4>View Customer</h4>
+                            </div>
+                            <div className="card-body" style={{ paddingLeft: 80 }}>
+                                <div className='table' style={{ width: 800, height: 400, overflowY: 'scroll' }}>
+                                    <table className='table table-striped table-danger'>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Mobile Number</th>
+                                                <th>Address</th>
+                                                <th>Action</th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {customer_HTMLTABLE}
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 const AddCustomer = () => {
 
     const [values, setValue] = useState({
+        
         first_name: "",
         middle_name: "",
         last_name: "",
@@ -43,53 +44,39 @@ const AddCustomer = () => {
             province: values.province,
             region: values.region
         }
-        //integration of sweetalert2
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-
-        axios.post("api/customerinfo", data).then(response => {
-            console.log(response.data.status);
-            if (response.data.status === 200) {
-                swalWithBootstrapButtons.fire({
-                    icon: "question",
-                    title: 'Add this customer?',
-                    text: response.data.confirmMessage,
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, Add this !',
-                    cancelButtonText: 'No, cancel!',
-                    reverseButtons: true
-                }).then((response) => {
-                    if(response.isConfirmed){
-                        swalWithBootstrapButtons.fire(
-                            'Added!',
-                            'Customer has been added.',
+        Swal.fire({
+            title: 'Save this customer?',
+            text: "This will be saved to the database.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post("api/customerinfo", data).then(response => {
+                    console.log(response.data.status);
+                    if (response.data.status === 200) {
+                        Swal.fire(
+                            'Saved!',
+                            'Customer has been saved...',
                             'success'
-                        )
-                        window.location.href = "/event";
-                    }else if(
-                        response.dismiss===Swal.DismissReason.cancel
-                    ){
-                        swalWithBootstrapButtons.fire(
-                            'Cancelled',
-                            'The customer has not been save. :)',
-                            'error'
-                          );
+                          ).then(response => {
+                            window.location.href = "/event";
+                        })
                     }
-                })
-            }
-            else if (response.data.status === 422) {
-                sweetAlert({
-                    icon: "info",
-                    title: response.data.message
-
+                    else if (response.data.status === 422) {
+                        sweetAlert({
+                            icon: "info",
+                            title: response.data.message
+        
+                        });
+                    }
                 });
+              
             }
-        });
+          })
+   
     }
 
 
@@ -111,58 +98,58 @@ const AddCustomer = () => {
                                 <div className='col text-start'>
                                     {/* Firstname */}
                                     <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Firstname</label><br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.first_name} onChange={handleChange} name='first_name' type="text" className="form-control" placeholder="First name" aria-label="First name" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.first_name} onChange={handleChange} name='first_name' type="text" className="form-control" placeholder="First name" aria-label="First name" required />
                                 </div>
                                 {/* Middlename */}
                                 <div className='col text-start'>
                                     <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Middlename</label><br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.middle_name} onChange={handleChange} name='middle_name' type="text" className="form-control" placeholder="Middle name" aria-label="Middle name" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.middle_name} onChange={handleChange} name='middle_name' type="text" className="form-control" placeholder="Middle name" aria-label="Middle name" required />
                                 </div>
                                 {/* Lastname */}
                                 <div className='col text-start'>
                                     <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Lastname</label><br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.last_name} onChange={handleChange} name='last_name' type="text" className="form-control" placeholder="Last name" aria-label="Last name" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.last_name} onChange={handleChange} name='last_name' type="text" className="form-control" placeholder="Last name" aria-label="Last name" required />
                                 </div>
                             </div>
                             {/* Phone Number */}
                             <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                                 <div className='col text-start'>
                                     <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Phone Number</label><br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.mobile_number} onChange={handleChange} name='mobile_number' type="number" className="form-control" placeholder="Phone number" aria-label="Phone number" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.mobile_number} onChange={handleChange} name='mobile_number' type="number" className="form-control" placeholder="Phone number" aria-label="Phone number" required />
                                 </div>
                                 {/* Email Address */}
                                 <div className='col text-start'>
                                     <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>E-mail Address</label><br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.email} onChange={handleChange} name='email' type="email" className="form-control" placeholder="E-mail address" aria-label="Middle name" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.email} onChange={handleChange} name='email' type="email" className="form-control" placeholder="E-mail address" aria-label="Middle name"  required/>
                                 </div>
                             </div>
                             <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                                 {/* Address */}
                                 <div className='col text-start'>
                                     <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Address</label><br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.address_line1} onChange={handleChange} name='address_line1' type="text" className="form-control" placeholder="Blk/Lot/House#" aria-label="Blk/Lot/House#" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.address_line1} onChange={handleChange} name='address_line1' type="text" className="form-control" placeholder="Blk/Lot/House#" aria-label="Blk/Lot/House#" required />
                                 </div>
                                 <div className='col text-start'>
                                     <br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.address_line2} onChange={handleChange} name='address_line2' type="text" className="form-control" placeholder="Street" aria-label="Street" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.address_line2} onChange={handleChange} name='address_line2' type="text" className="form-control" placeholder="Street" aria-label="Street"  required/>
                                 </div>
                                 <div className='col text-start'>
                                     <br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.barangay} onChange={handleChange} name='barangay' type="text" className="form-control" placeholder="Barangay" aria-label="Barangay" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.barangay} onChange={handleChange} name='barangay' type="text" className="form-control" placeholder="Barangay" aria-label="Barangay" required />
                                 </div>
                             </div>
                             <div className='row lh-lg' style={{ marginLeft: 30, marginRight: 30 }}>
                                 <div className='col text-start'>
                                     <br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.city} onChange={handleChange} name='city' type="text" className="form-control" placeholder="City" aria-label="City" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.city} onChange={handleChange} name='city' type="text" className="form-control" placeholder="City" aria-label="City" required/>
                                 </div>
                                 <div className='col text-start'>
                                     <br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.province} onChange={handleChange} name='province' type="text" className="form-control" placeholder="Province" aria-label="Province" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.province} onChange={handleChange} name='province' type="text" className="form-control" placeholder="Province" aria-label="Province" required />
                                 </div>
                                 <div className='col text-start'>
                                     <br />
-                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.region} onChange={handleChange} name='region' type="text" className="form-control" placeholder="Region" aria-label="Region" />
+                                    <input style={{ backgroundColor: "#F5F6FA", color: "#878787" }} value={values.region} onChange={handleChange} name='region' type="text" className="form-control" placeholder="Region" aria-label="Region" required />
                                 </div>
                             </div>
                             <button type="submit" id='btn-next' style={{ width: 200 }} className='btn btn-outline-primary btn-pos'>Next</button>

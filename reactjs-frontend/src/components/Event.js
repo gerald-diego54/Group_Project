@@ -39,53 +39,38 @@ const Event = () => {
             event_province: values_event.event_province,
             event_region: values_event.event_region
         }
-        console.log(data);
-
-          //integration of sweetalert2
-          const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-        axios.post("api/event", data).then(response => {
-            console.log(response.data.status);
-            if (response.data.status === 200) {
-                swalWithBootstrapButtons.fire({
-                    icon: "question",
-                    title: 'Add this customer event?',
-                    text: response.data.confirmMessage,
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, Add this !',
-                    cancelButtonText: 'No, cancel!',
-                    reverseButtons: true
-                }).then((response) => {
-                    if(response.isConfirmed){
-                        swalWithBootstrapButtons.fire(
-                            'Added!',
-                            'Event has been added to customer.',
+        Swal.fire({
+            title: 'Save to event?',
+            text: "This will be saved to the customer event!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post("api/event", data).then(response => {
+                    console.log(response.data.status);
+                    if (response.data.status === 200) {
+                        Swal.fire(
+                            'Event Saved',
+                            'The event was saved to the customer .',
                             'success'
-                        )
-                        window.location.href = "/payment";
-                    }else if(
-                        response.dismiss===Swal.DismissReason.cancel
-                    ){
-                        swalWithBootstrapButtons.fire(
-                            'Cancelled',
-                            'The customer has not been save. :)',
-                            'error'
-                          )
+                          ).then(response => {
+                            window.location.href = "/payment";
+                        });
                     }
-                })
-            }
-            else if (response.data.status === 422) {
-                sweetAlert({
-                    icon: "error",
-                    title: response.data.message
+                    else if (response.data.status === 422) {
+                        sweetAlert({
+                            icon: "error",
+                            title: response.data.validate_err
+                        });
+                    }
                 });
+             
             }
-        });
+          })
+        
     }
     return (
         <div>

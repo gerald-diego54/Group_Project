@@ -20,7 +20,7 @@ class PaymentModel extends Model
         "downpayment", 
         "collectibles",
         "bank_name",
-        "code",
-        "paymentstatus"
+        "cheque_code",
+        "payment_status"
     ];
 }

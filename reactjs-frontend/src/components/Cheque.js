@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../css/style.css';
 import Payment from './Payment';
-import sweetAlert from 'sweetalert';
-
+import Swal from 'sweetalert2';
+import axios from 'axios';
 const Cheque = () => {
     const [chequeData, setChequeData] = useState({
         payment_type: "Cheque",
@@ -17,25 +17,59 @@ const Cheque = () => {
         setChequeData({...chequeData, [e.target.name]: e.target.value})
     }
 
-    // for axios
-    // const data = {
-    //     payment_status: chequeData.payment_type,
-    //     amount: chequeData.amount,
-    //     cheque_code: chequeData.cheque_code,
-    //     payment_status: chequeData.payment_status,
-    //     bank_name: chequeData.bank_name
-    // }
-
+  
 
 
     const savePayment = (e) => {
         e.preventDefault();
-
+                 // for axios
+                const data = {
+                    payment_type: chequeData.payment_type,
+                    amount: chequeData.amount,
+                    bank_name: chequeData.bank_name,
+                    cheque_code: chequeData.cheque_code,
+                    payment_status: chequeData.payment_status
+                   
+                }
+                console.log(data);
         console.log(chequeData.amount)
-        sweetAlert({
-            icon: "success",
-            title: "Nextpage"
-        });
+        Swal.fire({
+            title: 'Save Payment?',
+            text: "This will be added to customer payment",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, save it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post("api/payment" ,data).then(response =>{
+                    console.log(response.data.status);
+                    if(response.data.status ===200){
+                        Swal.fire(
+                            'Saved!',
+                            'Payment Method saved.',
+                            'success'
+                          ).then((result) =>{
+                              //this line will save the data.....
+                              window.location.href = "/viewcustomer";
+                          })
+                    }
+                    else if(response.data.status ===422){
+                        Swal({
+                            icon: "info",
+                            title: response.data.message
+        
+                        });
+                    }
+                })
+      
+            }
+          })
+        // sweetAlert({
+        //     icon: "success",
+        //     title: "Nextpage"
+        // });
     }
 
     return (

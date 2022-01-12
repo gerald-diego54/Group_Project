@@ -14,13 +14,15 @@ class CreatePaymentTable extends Migration
     public function up()
     {
         Schema::create('customer_payment', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
+            $table->unsignedBigInteger('id');
             $table->string('payment_type');
             $table->integer('amount')->nullable();
             $table->integer('downpayment')->nullable();
             $table->integer('collectibles')->nullable();
             $table->string('bank_name')->nullable();
-            $table->string('code')->nullable();
+            $table->string('cheque_code')->nullable();
+            $table->string('payment_status')->nullable();
             $table->foreign('id')->references('id')->on('customer_info_table')->onDelete('cascade');
             $table->timestamps();
         });

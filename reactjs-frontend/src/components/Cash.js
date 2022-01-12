@@ -6,9 +6,9 @@ import sweetAlert from 'sweetalert';
 const Cash = () => {
     const [amount, setAmount] = useState(0);
     const [downpayment, setDownpaymnet] = useState(0);
-    let status;
+     let status;
     let collectibles = amount - downpayment;
-    console.log(status);
+    // console.log(status);
     if (amount === downpayment && amount != 0 && downpayment != 0){ 
         status = "Paid";
     }
