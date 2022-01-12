@@ -19,6 +19,7 @@ Route::delete('/deletecustomer/{id}',[SystemController::class, 'deleteCustomer']
 Route::get("/editproduct/{id}", [SystemController::class, "edit"]);
 Route::get("/countCustomer", [SystemController::class, "countCustomer"]); // get total customers
 Route::get("/nextEvent", [SystemController::class, "upcommingEvent"]); // get next event
+Route::get("/totalSales", [SystemController::class, "showTotalSales"]); // get total sales
 
 
 
