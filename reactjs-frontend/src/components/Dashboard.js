@@ -14,34 +14,21 @@ import axios from 'axios';
 const Dashboard = () => {
     const [noOfCustomer, setNoOfCustomer] = useState("");
     const [nextEvent, setNextEvent] = useState("");
+    const [totalCollectibles, setTotalCollectibles] = useState("");
     const [totalSales, setTotalSales] = useState("");
     const [loading, setLoading] = useState(true);
-    var total = "No Sales";
     var numOfCustomers = "No Data";
+    var total = "No Sales";
+    var collect = "No Collectibles";
     var nextDate = "No Event";
+    
     useEffect(() => {
-        axios.get('api/countCustomer').then(res => {
-            // console.log(res.data.status)
+        axios.get('api/dashboard').then(res => {
             if (res['status'] === 200) {
                 setNoOfCustomer(res.data.total_customer);
-                // console.log(res.data.total_customer);
-                setLoading(false);
-
-            }
-        });
-
-        axios.get('api/nextEvent').then(res => {
-            if (res['status'] === 200) {
-                // console.log(res.data.event.event_date);
-                setNextEvent(res.data.event.event_date);
-                setLoading(false);
-            }
-        });
-
-        axios.get('api/totalSales').then(res => {
-            if (res['status'] === 200) {
-                console.log(res.data.total);
                 setTotalSales(res.data.total);
+                setTotalCollectibles(res.data.collectibles);
+                setNextEvent(res.data.event.event_date);
                 setLoading(false);
             }
         });
@@ -52,15 +39,17 @@ const Dashboard = () => {
     }
     else if (noOfCustomer === 0)  {
         numOfCustomers = "No Data";
-        nextDate = "No Event";
         total = "No Sales";
+        collect = "No Collectibles";
+        nextDate = "No Event";
 
     }
     
     else {
         numOfCustomers = noOfCustomer;
-        nextDate = nextEvent;
         total = totalSales;
+        collect = totalCollectibles;
+        nextDate = nextEvent;
     }
     return (
         <div>
@@ -107,7 +96,7 @@ const Dashboard = () => {
                             <div className="card-body py-4 rounded" style={{ height: 90, backgroundColor: '#FEB161' }}>
                                 <div className='row'>
                                     <div className='col'>
-                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>Not Available</p>
+                                        <p className='fs-5 fw-bold text-white mx-3' style={{ float: "left", marginTop: -13 }}>{ collect }</p>
                                     </div>
                                     <div className='col'>
                                         <p className='text-white mx-3' style={{ float: "left", marginTop: -10 }}>Collectibles</p>

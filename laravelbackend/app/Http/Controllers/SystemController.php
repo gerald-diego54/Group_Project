@@ -306,28 +306,24 @@ class SystemController extends Controller
         else return response()->json(["status" => 404, "message" => "No product ID found!"]);
     }
 
-    public function countCustomer()
+    public function dashboardDisplay()
     {
-        $Customer = CateringModel::all();
-        $noOfCustomer = $Customer->count();
-        return response()->json(['status' => 200, "total_customer" => $noOfCustomer]);
-    }
+        $noOfCustomer  = CateringModel::all()
+            ->count();
 
-    public function upcommingEvent()
-    {
         $event = EventModel::select('event_name', 'event_date', 'event_status')
             ->where('event_status', 'Pending')
             ->orderBy('event_date', 'ASC')
             ->first();
 
-        return response()->json(['status' => 200, "event" => $event]);
-    }
+        $payment = PaymentModel::all();
+        $sales = $payment->sum('amount');
+        $collectibles = $payment->sum('collectibles');
 
-    public function showTotalSales()
-    {
-        $sales = PaymentModel::all()
-            ->sum('amount');
-
-        return response()->json(['status' => 200, "total" => $sales]);
+        return response()->json(['status' => 200, 
+        "total_customer" => $noOfCustomer,
+        "event" => $event,
+        "collectibles" => $collectibles,
+        "total" => $sales]);
     }
 }
