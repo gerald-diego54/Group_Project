@@ -11,7 +11,7 @@ import {
     PointElement,
     LineElement
   } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import axios from "axios";
 
 ChartJS.register(
@@ -28,10 +28,41 @@ ChartJS.register(
 
 
 
-const Chart = () => {
-    axios.get("api/dashboard").then(response => {
-        console.log(response.data.eventcount, response.data.status);
-    });
+export const BarChart = () => {
+    const [allCustomers, setAllCustomers] = useState();
+    const [allEvents, setAllEvents] = useState();
+    const [allPayments, setAllPayments] = useState();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios.get('api/customerStatus').then(res => {
+            if (res['status'] === 200) {
+                setAllCustomers(res.data.customers);
+                // console.log(res.data.customers.length);
+                setAllEvents(res.data.events);
+                // console.log(res.data.events);
+                setAllPayments(res.data.payments);
+                setLoading(false);
+            }
+        })
+
+    }, []);
+
+    if (loading) {
+        var whileLoading = " Loading Customer Data";
+    } else {
+        var eventDate;
+        var monthlyBooking = [0,0,0,0,0,0,0,0,0,0,0,0];
+        for(let i = 0; i < allCustomers.length; i++){
+        
+            eventDate = allEvents[i].event_date.split("-");
+            console.log(eventDate);
+            eventDate[i] = eventDate[1].replace(/^(?!00[^0])0/, '');
+            monthlyBooking[eventDate[1] - 1]++;
+            console.log(monthlyBooking);
+            
+        }
+    }
     const databar = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets:[
@@ -62,8 +93,6 @@ export const LineChart = () => {
     const [allEvents, setAllEvents] = useState();
     const [allPayments, setAllPayments] = useState();
     const [loading, setLoading] = useState(true);
-    var monthlySales = [12];
-    var monthlyBooking = [12];
 
     useEffect(() => {
         axios.get('api/customerStatus').then(res => {
@@ -84,15 +113,12 @@ export const LineChart = () => {
     } else {
         var eventDate;
         var monthlySales = [0,0,0,0,0,0,0,0,0,0,0,0];
-        var monthlyBooking = [0,0,0,0,0,0,0,0,0,0,0,0];
         for(let i = 0; i < allCustomers.length; i++){
         
             eventDate = allEvents[i].event_date.split("-");
             console.log(eventDate);
             eventDate[i] = eventDate[1].replace(/^(?!00[^0])0/, '');
-            monthlyBooking[eventDate[1] - 1]++;
             monthlySales[eventDate[1] - 1] += allPayments[i].amount;
-            console.log(monthlyBooking);
             console.log(monthlySales);
             
         }
