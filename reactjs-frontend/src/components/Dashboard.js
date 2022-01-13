@@ -17,7 +17,9 @@ const Dashboard = () => {
     const [nextEvent, setNextEvent] = useState("");
     const [totalCollectibles, setTotalCollectibles] = useState("");
     const [totalSales, setTotalSales] = useState("");
+    const [countEvent,setcountEvent] =useState([]);
     const [loading, setLoading] = useState(true);
+
     var numOfCustomers = "No Data";
     var total = "No Sales";
     var collect = "No Collectibles";
@@ -30,6 +32,8 @@ const Dashboard = () => {
                 setTotalSales(res.data.total);
                 setTotalCollectibles(res.data.collectibles);
                 setNextEvent(res.data.event.event_date);
+                setcountEvent(res.data['eventcount'])
+                console.log('test',setcountEvent);
                 setLoading(false);
             }
         });

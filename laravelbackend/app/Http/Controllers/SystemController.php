@@ -334,15 +334,25 @@ class SystemController extends Controller
             ->orderBy('event_date', 'ASC')
             ->first();
 
-        $payment = PaymentModel::all();
-        $sales =  $payment->sum('amount');
-        $collect =  $payment->sum('collectibles');
-
+            $payment = PaymentModel::all();
+            $sales =  $payment->sum('amount');
+            $collect =  $payment->sum('collectibles');
+           
+    
         return response()->json(['status' => 200, 
             "total_customer" => $noOfCustomer,
             "total" => $sales,
             "collectibles" => $collect,
             "event" => $event]);
+
+
+            //TEST 
+             $eventCount =  EventModel::table("event_info_table")
+            ->select("count (*)")
+            ->groupBy("month")
+            ->get();
+          
+                 return response()->json(['status'=> 200, "eventcount" =>$eventCount]);
     }
 
     public function markasDone(Request $request ,$id){
@@ -407,4 +417,6 @@ class SystemController extends Controller
                 $row]
         ]);
     }
+
+
 }
