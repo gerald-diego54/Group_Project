@@ -347,10 +347,9 @@ class SystemController extends Controller
 
 
             //TEST 
-             $eventCount =  EventModel::table("event_info_table")
-            ->select("count (*)")
-            ->groupBy("month")
-            ->get();
+             $eventCount =  EventModel::all()
+            ->groupBy('event_date','month')
+            ->count();
           
                  return response()->json(['status'=> 200, "eventcount" =>$eventCount]);
     }
