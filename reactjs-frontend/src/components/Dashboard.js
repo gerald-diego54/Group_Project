@@ -8,7 +8,6 @@ import { Time } from './Time';
 import axios from 'axios';
 import { BarChart, LineChart } from './Chart';
 
-// 
 
 const Dashboard = () => {
     const [noOfCustomer, setNoOfCustomer] = useState("");
