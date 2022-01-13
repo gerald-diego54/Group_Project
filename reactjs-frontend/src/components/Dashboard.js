@@ -29,8 +29,9 @@ const Dashboard = () => {
                 setTotalSales(res.data.total);
                 setTotalCollectibles(res.data.collectibles);
                 setNextEvent(res.data.event.event_date);
+                console.log(res.data.event);
                 setcountEvent(res.data['eventcount'])
-                console.log('test',setcountEvent);
+                // console.log('test',setcountEvent);
                 setLoading(false);
             }
         });
