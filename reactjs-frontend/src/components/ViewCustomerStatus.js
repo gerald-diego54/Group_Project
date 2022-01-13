@@ -92,8 +92,6 @@ const ViewCustomerStatus = () => {
                 setAllEvents(res.data.events);
                 // console.log(res.data.events);
                 setAllPayments(res.data.payments);
-                // console.log(res.data.payments);
-                setRowCount(res.data.row_count);
                 setLoading(false);
             }
         })
