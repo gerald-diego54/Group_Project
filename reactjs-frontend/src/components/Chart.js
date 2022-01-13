@@ -31,8 +31,6 @@ export const BarChart = () => {
     const [allEvents, setAllEvents] = useState();
     const [allPayments, setAllPayments] = useState();
     const [loading, setLoading] = useState(true);
-    var monthlySales = [12];
-    var monthlyBooking = [12];
 
     useEffect(() => {
         axios.get('api/customerStatus').then(res => {
@@ -52,7 +50,6 @@ export const BarChart = () => {
         var whileLoading = " Loading Customer Data";
     } else {
         var eventDate;
-        var monthlySales = [0,0,0,0,0,0,0,0,0,0,0,0];
         var monthlyBooking = [0,0,0,0,0,0,0,0,0,0,0,0];
         for(let i = 0; i < allCustomers.length; i++){
         
@@ -60,9 +57,7 @@ export const BarChart = () => {
             console.log(eventDate);
             eventDate[i] = eventDate[1].replace(/^(?!00[^0])0/, '');
             monthlyBooking[eventDate[1] - 1]++;
-            monthlySales[eventDate[1] - 1] += allPayments[i].amount;
             console.log(monthlyBooking);
-            console.log(monthlySales);
             
         }
     }
@@ -98,8 +93,6 @@ export const LineChart = () => {
     const [allEvents, setAllEvents] = useState();
     const [allPayments, setAllPayments] = useState();
     const [loading, setLoading] = useState(true);
-    var monthlySales = [12];
-    var monthlyBooking = [12];
 
     useEffect(() => {
         axios.get('api/customerStatus').then(res => {
@@ -120,15 +113,12 @@ export const LineChart = () => {
     } else {
         var eventDate;
         var monthlySales = [0,0,0,0,0,0,0,0,0,0,0,0];
-        var monthlyBooking = [0,0,0,0,0,0,0,0,0,0,0,0];
         for(let i = 0; i < allCustomers.length; i++){
         
             eventDate = allEvents[i].event_date.split("-");
             console.log(eventDate);
             eventDate[i] = eventDate[1].replace(/^(?!00[^0])0/, '');
-            monthlyBooking[eventDate[1] - 1]++;
             monthlySales[eventDate[1] - 1] += allPayments[i].amount;
-            console.log(monthlyBooking);
             console.log(monthlySales);
             
         }
