@@ -397,7 +397,8 @@ class SystemController extends Controller
 
         $payments = PaymentModel::select(
             'amount',
-            'payment_status')
+            'payment_status',
+            'collectibles')
             ->get();
 
         $row = count($customers);

@@ -112,13 +112,19 @@ export const LineChart = () => {
         var whileLoading = " Loading Customer Data";
     } else {
         var eventDate;
+        var collectibles;
         var monthlySales = [0,0,0,0,0,0,0,0,0,0,0,0];
         for(let i = 0; i < allCustomers.length; i++){
         
             eventDate = allEvents[i].event_date.split("-");
             console.log(eventDate);
             eventDate[i] = eventDate[1].replace(/^(?!00[^0])0/, '');
-            monthlySales[eventDate[1] - 1] += allPayments[i].amount;
+            if(parseInt(allPayments[i].collectibles) != null) {
+                collectibles =  allPayments[i].collectibles;
+                console.log("Collectibles from db " + collectibles);
+            }
+            else collectibles = 0;
+            monthlySales[eventDate[1] - 1] += allPayments[i].amount - collectibles;
             console.log(monthlySales);
             
         }
