@@ -348,7 +348,7 @@ class SystemController extends Controller
 
             //TEST 
              $eventCount =  EventModel::all()
-            ->groupBy('event_date','month')
+            // ->groupBy('event_date','month')
             ->count();
           
                  return response()->json(['status'=> 200, "eventcount" =>$eventCount]);
@@ -417,5 +417,32 @@ class SystemController extends Controller
         ]);
     }
 
+    public function updatepayment(Request $request, $id)
+    {
+        $update_payment = PaymentModel::find($id);
+        if ($update_payment) {
+            $update_payment -> amount = $request -> input("amount");
+            $update_payment -> downpayment = $request -> input("downpayment");
+            $update_payment -> collectibles = $request -> input("collectibles");
+            $update_payment -> update();
+            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+        }
+        else {
+            return response()->json(["status" => 422, "message" => "Customer Payment Update Error"]);
+        }
+    }
 
+    public function updatecheque(Request $request, $id)
+    {
+        $update_payment = PaymentModel::find($id);
+        if ($update_payment) {
+            $update_payment -> bank_name = $request -> input("bank_name");
+            $update_payment -> cheque_code = $request -> input("cheque_code");
+            $update_payment -> update();
+            return response()->json(["status" => 200, "message" => "Customer Payment Updated Successfully."]);
+        }
+        else {
+            return response()->json(["status" => 422, "message" => "Customer Payment Update Error"]);
+        }
+    }
 }

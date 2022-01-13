@@ -10,6 +10,7 @@ import {
     Legend,
   } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import axios from "axios";
 
 ChartJS.register(
     CategoryScale,
@@ -20,8 +21,13 @@ ChartJS.register(
     Legend
   );
 
-const Chart = () => {
 
+
+
+const Chart = () => {
+    axios.get("api/dashboard").then(response => {
+        console.log(response.data.eventcount, response.data.status);
+    });
     const databar = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets:[
