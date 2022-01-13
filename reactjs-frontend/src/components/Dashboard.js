@@ -50,7 +50,7 @@ const Dashboard = () => {
     
     else {
         numOfCustomers = noOfCustomer;
-        total = totalSales;
+        total = totalSales - totalCollectibles;
         collect = totalCollectibles;
         nextDate = nextEvent;
     }
