@@ -5,30 +5,28 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import sweetAlert from 'sweetalert';
 import { useParams } from 'react-router-dom';
+import Sidebar from './Sidebar';
+import { Time } from './Time';
+import fieldset3 from '../images/fieldset_3.svg';
 
 const EditCheque = () => {
-    const [chequeData, setChequeData] = useState({
-        payment_type: "Cheque",
-        amount: 0.00,
-        cheque_code: "",
-        bank_name: "",
-        payment_status: ""
-    });
-    const {id} = useParams();
+    const [chequeData, setChequeData] = useState({});
+    const { id } = useParams();
     // retrieve data from input fields
 
     const handleChange = (e) => {
-        setChequeData({ ...chequeData, [e.target.name]: e.target.value })
+        setChequeData({ ...chequeData, [e.target.name]: e.target.value });
     }
 
     // Retrieve data from axios
     useEffect(() => {
         axios.get(`api/editpayment/${id}`).then(
             response => {
-                console.log(response.data.payments)
+                console.table(response.data.payments);
                 if (response.data.status === 200) {
-                    setChequeData(response.data.value); //set data here
+                    setChequeData(response.data.payments); //set data here
                     // setLoading(false);
+                    
                 }
                 else if (response.data.status === 404) {
                     sweetAlert('error', response.data.message).then(response => {
@@ -37,11 +35,10 @@ const EditCheque = () => {
                 }
             });
     }, [id]);
-
-
+    // console.table(chequeData);
+    // console.log(chequeData.payment_type);
     const savePayment = (e) => {
         e.preventDefault();
-        // for axios
         const data = {
             payment_type: chequeData.payment_type,
             amount: chequeData.amount,
@@ -51,7 +48,6 @@ const EditCheque = () => {
 
         }
         console.log(data);
-        console.log(chequeData.amount)
         Swal.fire({
             title: 'Save Payment?',
             text: "This will be added to customer payment",
@@ -62,7 +58,7 @@ const EditCheque = () => {
             confirmButtonText: 'Yes, save it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post("api/payment", data).then(response => {
+                axios.put(`api/updatecheque/${id}`, data).then(response => {
                     console.log(response.data.status);
                     if (response.data.status === 200) {
                         Swal.fire(
@@ -88,42 +84,53 @@ const EditCheque = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={savePayment} style={{ position: 'relative', bottom: 550, left: 450, width: 700 }}>
+        <>
+            <Sidebar />
+            <div className='container' style={{ width: 1056, height: 900, marginLeft: 340, marginTop: 0 }}>
                 <div className='row'>
-                    <div className='col text-start'>
-                        {/* Event Type */}
-                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Bank Name</label><br />
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={handleChange} name='bank_name' type="text" placeholder="Bankname" className="form-control" aria-label="First name" />
+                    <div className='col'>
+                        <p className='fs-3 fw-bold' style={{ float: "left", marginLeft: 20, marginTop: 20 }}>View Customer</p>  <Time />
                     </div>
-                    <div className='col text-start'>
-                        {/* Event Type */}
-                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Code</label><br />
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={handleChange} name='cheque_code' type="text" placeholder="Code" className="form-control" aria-label="First name" />
-                    </div>
+                </div><br />
+                <div className='container bg-white rounded shadow' style={{ width: 1000, height: 600 }}><br />
+                    {/* FieldSet 1 */}
+                    <img alt='' className='my-4' src={fieldset3} />
+                    <form onSubmit={savePayment} style={{ position: "relative", bottom: 440, left: 70 }}>
+                        <div className='row lh-lg'>
+                            <div className='col text-start'>
+                                <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Select Payment type</label><br />
+                                {/* onChange={(e) => setPaymentType(e.target.value)} */}
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} value={chequeData.payment_type} onChange={handleChange} name='payment_type' type="text" className="form-control" aria-label="payment type" />
+                            </div>
+                        </div><br />
+                        <div className='row'>
+                            <div className='col text-start'>
+                                {/* Event Type */}
+                                <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Bankname</label><br />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} value={chequeData.bank_name} onChange={handleChange} name='bank_name' type="text" className="form-control" aria-label="First name" required />
+                            </div>
+                            <div className='col text-start'>
+                                {/* Event Type */}
+                                <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Cheque Code</label><br />
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} value={chequeData.cheque_code} onChange={handleChange} name='cheque_code' type="text" className="form-control" aria-label="First name" required />
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col text-start'><br /><br />
+                                {/* Event Type */}
+                                <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Payment Status</label>
+                                <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} value={chequeData.payment_status} onChange={handleChange} name='payment_status' type="text" placeholder="" className="form-control" aria-label="First name" disabled />
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col text-start'><br /><br />
+                                <button type='submit' className='btn btn-outline-dark btn-md w-25'>Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div className='row'>
-                    <div className='col text-start'><br /><br />
-                        {/* Event Type */}
-                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Amount</label>
-                        <input style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={handleChange} name='amount' type="text" placeholder="Php 0.00" className="form-control" aria-label="First name" />
-                    </div>
-                    <div className='col text-start'><br /><br />
-                        {/* Event Type */}
-                        <label className='fw-bold' style={{ color: "#263056", fontSize: 18 }}>Payment Status</label>
-                        <select style={{ backgroundColor: "#F5F6FA", color: "#878787", width: 300 }} onChange={handleChange} name='payment_status' type="text" placeholder="Status" className="form-control" aria-label="First name" >
-                            <option>Paid</option>
-                            <option>Not Paid</option>
-                        </select>
-                    </div>
-                </div>
-                <div className='row'>
-                    <div className='col text-start'><br /><br />
-                        <button className='btn btn-outline-dark btn-md w-25'>Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </>
     )
 }
 
