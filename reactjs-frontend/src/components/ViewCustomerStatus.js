@@ -9,7 +9,6 @@ const ViewCustomerStatus = () => {
     const [allCustomers, setAllCustomers] = useState();
     const [allEvents, setAllEvents] = useState();
     const [allPayments, setAllPayments] = useState();
-     const [rowCount, setRowCount] = useState();
     const [loading, setLoading] = useState(true);
 
     const markAsDone = (e , id) =>{
@@ -91,8 +90,6 @@ const ViewCustomerStatus = () => {
                 setAllEvents(res.data.events);
                 // console.log(res.data.events);
                 setAllPayments(res.data.payments);
-                // console.log(res.data.payments);
-                setRowCount(res.data.row_count);
                 setLoading(false);
             }
         })

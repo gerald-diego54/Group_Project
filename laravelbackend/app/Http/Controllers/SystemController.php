@@ -407,4 +407,12 @@ class SystemController extends Controller
                 $row]
         ]);
     }
+
+    public function getGraphDetails()
+    {
+        $events = EventModel::select('event_date')
+            ->get();
+        
+            return response()->json(['status' => 200, 'events' => $events]);
+    }
 }

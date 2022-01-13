@@ -8,7 +8,7 @@ import image_1 from '../images/img_1.svg';
 import Sidebar from './Sidebar';
 import { Time } from './Time';
 import axios from 'axios';
-import Chart from './Chart';
+import { BarChart, LineChart } from './Chart';
 
 
 
@@ -123,12 +123,12 @@ const Dashboard = () => {
                 <div className='row'>
                     <div className='col'>
                         <div className="container shadow bg-body rounded" style={{ marginLeft: 20, border: 0, width: 451, height: 254, position: "relative", top: 50 }}>
-                            <Chart name="Monthly Sales"/>
+                            <BarChart name="Monthly Booking"/>
                         </div>
                     </div>
                     <div className='col'>
                         <div className="container shadow bg-body rounded" style={{ marginLeft: 20, border: 0, width: 451, height: 254, position: "relative", top: 50 }}>
-                            <img alt='' className='my-4' src={graph_two} />
+                            <LineChart name="Monthly Sales"/>
                         </div>
                     </div>
                 </div><br /><br />
