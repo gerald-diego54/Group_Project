@@ -1,8 +1,6 @@
 // Dashboard
 import React, { useState, useEffect } from 'react';
 import '../css/style.css';
-import graph_one from '../images/chart_1.svg';
-import graph_two from '../images/chart_2.svg';
 import graph_three from '../images/chart_3.svg';
 import image_1 from '../images/img_1.svg';
 import Sidebar from './Sidebar';

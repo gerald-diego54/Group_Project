@@ -14,7 +14,7 @@ class SystemController extends Controller
     //This function will return the data of Customer
     public function showCustomer()
     { //similar to index
-        $Customer = CateringModel::all();
+        $Customer = CateringModel::all();//
         return response()->json(['status' => 200, "customer" => $Customer]);
     }
 
